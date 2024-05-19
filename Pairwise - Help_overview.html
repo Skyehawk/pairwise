@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Pairwise%20-%20Help_overview_files/dashlane-tiresias-page-script.js" id="dashlane_tiresias"></script><script src="Pairwise%20-%20Help_overview_files/dashlane-webauthn-page-script.js" id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pairwise - Help</title>
+    <link rel="icon" type="image/x-icon" href="https://www.pythonanywhere.com/static/images/logo3_mini.png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            /*margin-top: 10px;*/
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+        }
+
+        header {
+            margin: 5px 0; /* Adjust the margin as needed */
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .logo {
+            text-align: center; /* Center align the logo */
+            padding-top: 10px; /* Adjust top padding as needed */
+        }
+
+        .logo img {
+            width: 50px; /* Set the width as needed */
+            height: auto;
+        }
+
+        /* Style for navbar dropdown menu */
+        .navbar {
+            text-align: center;
+            background-color: #f2f2f2;
+            overflow: visible; /* Adjust overflow */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1; /* Ensure dropdowns appear on top */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2; /* Adjust z-index to appear above other elements */
+            padding: 0;
+            top: 100%; /* Show below the navbar */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            padding: 14px 16px; /* Adjust padding on hover */
+            display: block;
+            width: 100%; /* Make the link cover the entire width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        article {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .multiline {
+          white-space: pre-wrap;
+        }
+
+        .listshift {
+        	margin-left: 0;
+            padding-left: 3em;
+            list-style-type: none;
+
+        }
+        .formatlistitem:before {
+            content: "\2022";
+            font-weight: "bold";
+            text-align: left;
+            white-space: normal;
+            display: inline-block;
+            padding: 0;
+            /*padding-left: 1em;*/
+            margin: 0 0 0 -2em;
+            width: 1em;
+        }
+
+        /* Styles for the collapsed sidebar and toggle button */
+        aside {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 20%;
+            overflow: auto;
+            transition: width 0.3s ease; /* Smooth transition for collapsing */
+        }
+
+        aside.collapsed {
+            width: 25px; /* Set the collapsed width as needed */
+        }
+
+        .sidebar-header,
+        #sidebarNav {
+            transition: display 0.3s ease; /* Smooth transition for header and list */
+        }
+
+        .sidebar-header.collapsed,
+        #sidebarNav.collapsed {
+            display: none; /* Hide the header and list when collapsed */
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust other styles as needed for the collapsed sidebar */
+        aside:not(.collapsed) ul {
+            /* Your existing sidebar styles */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+
+        /* Additional styles for the help page */
+        /* ... */
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="Pairwise%20-%20Help_overview_files/logo3.jpeg" alt="Logo">
+    </div>
+
+        <div class="navbar">
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/">Home</a>
+            <div class="dropdown-content">
+                <!-- Your home content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Tools</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/file-processing">File Processing Tool</a>
+                <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/stats">Usage Stats</a>
+            <div class="dropdown-content">
+                <!-- Your stats content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">About</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/about">About the Project</a>
+                <a href="https://www.pythonanywhere.com/change-log">Change Log, Todo &amp; Bugs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Help</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/help-overview">Overview</a>
+                <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a>
+                <a href="https://www.pythonanywhere.com/help-SVD">Data Processing</a>
+                <a href="https://www.pythonanywhere.com/help-basic-tutorial">Basic Tutorial</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h2>Pairwise - Help - Overview</h2>
+    </header>
+
+    <main>
+        <aside>
+            <div class="sidebar-toggle">☰</div>
+            <h2 class="sidebar-header">Navigation</h2>
+            <ul id="sidebarNav" padding-left="1em">
+                <li><a href="#introduction">Introduction</a></li>
+                <!--<li><a href="#concepts">Underpinning Concepts</a></li>-->
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#faqs">FAQs &amp; Troubleshooting</a></li>
+                <li><a href="#additional-resources">Additional Resources</a></li>
+                <!--<li><a href="#feedback">Feedback and Contact</a></li>-->
+            </ul>
+        </aside>
+
+        <article>
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>
+                    This help page covers a variety of topics
+                    get the most from your collected data for
+                    use with the Pairwise tool to perform singular value
+                    decomposition (SVD) rank recovery (i.e., generate picklists
+                    from comparing teams against each other). There are some
+                    limitations and strategies the end user can employ to ensure
+                    a smooth user experience, limit potential issues, and
+                    ultimately achieve a greater success rate. <br><br>
+
+                    The Pairwise tool is a season-independent scouting analysis
+                    aid, capable of performing standalone rank recovery
+                    generation for all manner of tasks.
+                    The purpose of this tool is to provide scouting support for:
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">Teams that may not have enough members to scout efficiently</li>
+                        <li class="formatlistitem">Teams that may not have time to create their own data collection methods </li>
+                        <li class="formatlistitem">Teams that rely on community statistical tools </li>
+                        <li class="formatlistitem">Teams that would like a starting point based on team preference to begin scouting meetings </li>
+                        <li class="formatlistitem">Developing team comparison/analytical skills to expedite scouting meetings </li>
+                        <li class="formatlistitem">Scouting on vibes 🤙 </li>
+                    </ul>
+
+                    Pairwise is not suited for / capable of:
+                    <ul class="listshift">
+                        <li class="formatlistitem"><strong>Any</strong> 
+form of data storage - there is a rudimentary calculator for
+                        .csv contents provided by the webapp for 
+convienence but it is not capable of any data storage. This may change
+                        in the future, but for now you will need to 
+manage your own output. A guide on how to do this will be provided.</li>
+                        <li class="formatlistitem">Analyizing existing quantitative data, if your data is already in this form you likely
+                        are better off sorting it by that metric to begin with</li>
+                        <li class="formatlistitem">Fixing pooly collected/ inconsistent data - garbage in, garbage out </li>
+                    </ul>
+
+                    The underpinning philosophy on development is this should be
+                    a tool that is instantaneously usable for data processing
+                    with no special alterations from season-to-season for
+                    game-specific tasks. Updates to Pairwise are not
+                    needed each year on kickoff, and development in the weeks
+                    leading up to during the competition season will be
+                    <strong>extremely</strong> limited and focused on bugs, not
+                    adding new features.
+                    <br><br>
+
+                    Usage is simple, relying on the pairwise comparison of items
+                    (hereafter teams) in order to reconstruct a ranking. The more
+                    observations collected, the greater the separability of teams
+                    becomes. Consistency is key in these observations; practice
+                    and a rubric may make this easier. A rudimentary calculator
+                    for the purposes of limited data generation is provided (you
+                    will need to place the calculated values in your data .csv
+                    yourself). Pairwise rank rconstruction has been tested with
+                    more than 500 individual observations. More on this in
+                    <a href="http://www.pairwisetool.com/help-datagen#getting-started">Getting Started</a>.
+                    <br><br>
+
+                    Fundamentally, the process of ranking should encourage
+                    discussion in the stands among scouts, building team
+                    analysis skills. A picklist from these observations,
+                    generated by Pairwise, should provide a useful starting
+                    point, whereafter discussion and/or additional data can be
+                    used to adjust the Pairwise generated picklist for a team's
+                    specific needs.
+                    <br><br>
+
+                    The core functionality of the pairwise tool is provided here
+                    as a community benefit free of charge as well as in a GitHub
+                    repo and a <a href="https://colab.research.google.com/drive/15HBEACe7DIynmUbxitF1Q-bJ0XZK-TeH?usp=sharing">Google Colab notebook</a>
+                    for those who wish to have offline capabilities and
+                    contingency plans in place in the event of outages.
+
+                <p></p>
+                <!-- Add more content here -->
+
+            </section>
+
+            <section id="getting-started">
+                <h2>Getting Started</h2>
+
+                <p>
+                    Since Pairwise focuses on subjective rankings of aspects
+                    that may be difficult or time-consuming to quantify (such as
+                    driver skill, defense/avoiding prowess, robot speed, or "vibes"), it
+                    may be useful to generate a rubric on what constitutes a good
+                    team in this category. I recommend you start simple, by
+                    generating some guidelines on which attributes make a team
+                    attractive and which detract for your chosen use case. I
+                    would also not try to evaluate more than 2 different qualitative
+                    attributes per match; this will simply be too much to handle
+                    at the start.<br><br>
+
+                    A list of attributes for robot speed may look like:<br><br>
+
+                    Pros:
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">Fastest driving robot on alliance</li>
+                        <li class="formatlistitem">Always the most lined up with gamepiece/field element on the first attempt</li>
+                        <li class="formatlistitem">Touches a game piece - Owns it</li>
+                        <li class="formatlistitem">Goes around blockages more than alliance partners that may slow them down vs through</li>
+                        <li class="formatlistitem">Spends the least amount of time stopped at a feeder station, the robot that is always in motion</li>
+                    </ul>
+
+                    Cons:
+                    <ul class="listshift">
+                        <li class="formatlistitem">Likes to run into and push other robots (including alliance partners)</li>
+                        <li class="formatlistitem">Often clips or runs into major elements of the field more than alliance partners</li>
+                        <li class="formatlistitem">Spends the most time chasing game pieces around the field</li>
+                        <li class="formatlistitem">The robot on the alliance that may move game pieces around without purpose</li>
+                    </ul>
+
+                    You may have noticed that we are defining everything relative to
+                    the alliance partners, not to the best team at the event.
+
+                    This allows us to evaluate <strong>just</strong> what is happening
+                    in front of us, hopefully reducing the effects of recency bias
+                    or confirmation bias. You could have 3 robots that are absolutely
+                    horrible in that match (maybe one has electrical issues, one
+                    has a broken mechanism, and one was designed poorly). Your
+                    goal is to rank the best of what is in front of you right now,
+                    just in this particular match. <br><br>
+
+                    There is nothing stopping you from including observations of
+                    when a team goes head-to-head with another team on the other
+                    alliance; you could also include observations in the .csv
+                    from back-to-back matches. Just be aware of the aforementioned
+                    biases.
+
+                    With the above as a rough rubric, you can use it to rank the
+                    best and worst teams on an alliance. You can generate the
+                    pairwise comparisons youself (see the <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a> help
+                    page) or use the <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>.
+                <p></p>
+
+
+                <!-- Add more content here -->
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+
+                <p>
+                    Touch support on <s> coming soon</s> avalible for the <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>!
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="faqs">
+                <h2>FAQs &amp; Troubleshooting</h2>
+
+                <p>
+                    Coming Soon!
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="additional-resources">
+                <h2>Additional Resources</h2>
+
+                <p>
+                    Coming Soon!
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <!-- Footer content if needed -->
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('aside');
+            const sidebarNav = document.querySelector('#sidebarNav');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                sidebarHeader.classList.toggle('collapsed');
+                sidebarNav.classList.toggle('collapsed');
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(e,t) { return this._call('downloadPdfs', [e,t]); },
+  open() { return this._call('open', []); },
+  setLoginToken(e) { return this._call('setLoginToken', [e]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.4031338572744291', methodName, methodArgs }, 'https://www.pythonanywhere.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>

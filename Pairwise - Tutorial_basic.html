@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Pairwise%20-%20Tutorial_basic_files/dashlane-tiresias-page-script.js" id="dashlane_tiresias"></script><script src="Pairwise%20-%20Tutorial_basic_files/dashlane-webauthn-page-script.js" id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pairwise - Tutorial</title>
+    <link rel="icon" type="image/x-icon" href="https://www.pythonanywhere.com/static/images/logo3_mini.png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            /*margin-top: 10px;*/
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+        }
+
+        header {
+            margin: 5px 0; /* Adjust the margin as needed */
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .logo {
+            text-align: center; /* Center align the logo */
+            padding-top: 10px; /* Adjust top padding as needed */
+        }
+
+        .logo img {
+            width: 50px; /* Set the width as needed */
+            height: auto;
+        }
+
+        /* Style for navbar dropdown menu */
+        .navbar {
+            text-align: center;
+            background-color: #f2f2f2;
+            overflow: visible; /* Adjust overflow */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1; /* Ensure dropdowns appear on top */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2; /* Adjust z-index to appear above other elements */
+            padding: 0;
+            top: 100%; /* Show below the navbar */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            padding: 14px 16px; /* Adjust padding on hover */
+            display: block;
+            width: 100%; /* Make the link cover the entire width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        article {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .multiline {
+          white-space: pre-wrap;
+        }
+
+        .listshift {
+        	margin-left: 0;
+            padding-left: 3em;
+            list-style-type: none;
+
+        }
+        .formatlistitem:before {
+            content: "\2022";
+            font-weight: "bold";
+            text-align: left;
+            white-space: normal;
+            display: inline-block;
+            padding: 0;
+            /*padding-left: 1em;*/
+            margin: 0 0 0 -2em;
+            width: 1em;
+        }
+
+        /* Styles for the collapsed sidebar and toggle button */
+        aside {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 20%;
+            overflow: auto;
+            transition: width 0.3s ease; /* Smooth transition for collapsing */
+        }
+
+        aside.collapsed {
+            width: 25px; /* Set the collapsed width as needed */
+        }
+
+        .sidebar-header,
+        #sidebarNav {
+            transition: display 0.3s ease; /* Smooth transition for header and list */
+        }
+
+        .sidebar-header.collapsed,
+        #sidebarNav.collapsed {
+            display: none; /* Hide the header and list when collapsed */
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust other styles as needed for the collapsed sidebar */
+        aside:not(.collapsed) ul {
+            /* Your existing sidebar styles */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* warnings and notice style */
+        .notice {
+          background-color: #fff6bf; /* Yellow color */
+          padding: 15px;
+          border-radius: 5px;
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+          width: fit-content;
+          margin: 20px; /* Adding 20px margin around the box */
+        }
+
+        /* Additional styles for the help page */
+        /* ... */
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="Pairwise%20-%20Tutorial_basic_files/logo3.jpeg" alt="Logo">
+    </div>
+
+        <div class="navbar">
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/">Home</a>
+            <div class="dropdown-content">
+                <!-- Your home content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Tools</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/file-processing">File Processing Tool</a>
+                <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/stats">Usage Stats</a>
+            <div class="dropdown-content">
+                <!-- Your stats content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">About</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/about">About the Project</a>
+                <a href="https://www.pythonanywhere.com/change-log">Change Log, Todo &amp; Bugs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Help</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/help-overview">Overview</a>
+                <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a>
+                <a href="https://www.pythonanywhere.com/help-SVD">Data Processing</a>
+                <a href="https://www.pythonanywhere.com/help-basic-tutorial">Basic Tutorial</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h2>Pairwise - Tutorial</h2>
+    </header>
+
+    <main>
+        <aside>
+            <div class="sidebar-toggle">☰</div>
+            <h2 class="sidebar-header">Navigation</h2>
+            <ul id="sidebarNav" padding-left="1em">
+                <li><a href="#setup">Initial setup and Preperation</a></li>
+                <li><a href="#collection">Collecting Data</a></li>
+                <li><a href="#analysis">Analyzing Data</a></li>
+                <li><a href="#applicaiton">Applying Results</a></li>
+            </ul>
+        </aside>
+
+        <article>
+            <!-- Notice/ Announcments -->
+            <div class="notice">
+                <p><strong>Notice:</strong><br><br> Touch support on mobile devices, while functional, is not super polished.
+                    </p><ul>
+                        <li>Tap and hold a checkbox should cause it to check</li>
+                        <li>Double tap a team number should allow for updating team numbers manually if not using TBA integration</li>
+                        <li> There is a bug where dropping one input on top of another will cause it to disappear</li>
+                    </ul>
+                <br><br>
+
+                Thanks for your patience when using on mobile.
+                <p></p>
+            </div>
+
+
+            <section id="setup">
+                <h2>Setup</h2>
+                <p>
+                    Pairwise operates on relative comparisons between 
+teems. You only need to consider the best robot on that alliance, even 
+if everyone playing is only using base drivetrains.
+                    There will still be a "Best robot" and a "Worst 
+robot". With this in mind we will develop a rubric on a metric that is 
+difficult to scout with community tools (i.e. driver smoothness).
+                    Other metrics such as gamepieces scored are pretty 
+well correlated with stats such as EPA, OPR, etc. <br><br>
+
+                    The rubric is designed to mostly be a simple set 
+ofguidelines with room for interpretation an nuance. This needs to be 
+applied evenly across the event, you cannot change what qualifies as
+                    meeting a criteria or not part way through. As such 
+we frame things to not be oversensitive to a single occurance of an 
+event and rather on the holistic picture. For example a team shouldn't
+                    be overly judged for a single instance of taking a 
+while to line up at a feeder station, but if it happens substantially 
+more than other teams on the alliance that is an issue.
+                    By the same token if a team executes a pristine spin
+ move to avoid defense/traffic that is good, but wat we really care 
+about is if they do it consistently and better thatn the other teams on
+                    their alliance.
+
+                    Here are some example open ended rubrics: <br>
+
+                    </p><table>
+                        <tbody><tr>
+                            <th>Theme of Data Collection</th>
+                            <th>Positive Factors</th>
+                            <th>Negative Factors</th>
+                            <th>FRC experience required to scout this theme effectivly</th>
+                        </tr>
+                        <tr>
+                            <th><strong>Speed and Smoothness</strong> - Focus on quickness and agility</th>
+                            <td>
+                                <ul>
+                                    <li>Minimal time spent lingering at feeder station</li>
+                                    <li>"Touch-it-own-it" intake</li>
+                                    <li>Avoiding/threading needle through traffic</li>
+                                    <li>Minimal to no time spent waiting to score</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Multiple attempts to aquire gampieces at feeder station</li>
+                                    <li>Chasing gamepieces around field with intake</li>
+                                    <li>Actively getting caught up in defense/traffic when attempting to score</li>
+                                    <li>Gamepieces stuck in robot causeing delays</li>
+                                </ul>
+                            </td>
+                            <td> Prior FRC competition experience or practice identifying positives/negatives on video</td>
+                        </tr>
+
+                        <tr><th><strong>Aggressive scoring<strong> - Maximixing score difference between alliance</strong></strong></th>
+                            <td>
+                                <ul>
+                                    <li>Minimal time spent lingering at feeder station</li>
+                                    <li>"Touch-it-own-it" intake</li>
+                                    <li>Power through, pushing opponents out of way and gamepieces towards own goal</li>
+                                    <li>Minimal to no time spent waiting to score, even at (minor) expense of alliance partners</li>
+                                    <li>Not afraid to bait opponent into drawing a foul</li>
+                                    <li>Oppertunistic defense to slow opponent down more than it costs themselves in time (i.e. knock opponent gamepiece loose)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Hesitent or waiting for opponents to get out of way</li>
+                                    <li>Avoiding contact or giving up gampiece to opponent  bots</li>
+                                    <li>ovoiding entering opponent zones if there is no risk of foul</li>
+                                    <li>Gamepieces stuck in robot causing delays in scoring</li>
+                                </ul>
+                            </td>
+                            <td> Prior FRC competition experience or practice identifying positives/negatives on video</td>
+                        </tr>
+
+                        <tr>
+                            <th>Pure Vibes</th>
+                            <td>vibes - if you know you know</td>
+                            <td>vibes - if you know you know</td>
+                            <td>Difficult - Years of FRC scouting experience likely required</td>
+                        </tr>
+                    </tbody></table>
+
+
+
+                <p></p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="collection">
+                <h2>Data collection</h2>
+                <p>
+                    </p><h4>Overview</h4>
+                    Pairwise can analyze data generated from a variety 
+of sources as long as it follows the proper formatting (which can 
+easeily be achieved in a spereadsheet).
+                    For the purposes of this tutorial we will use the 
+data generated by the included data generation tool. <br><br>
+
+                    The data generation tool creates the following info for each combinaiton of teams on an alliance: <br>
+
+                    <ul>
+                        <li>Team A</li>
+                        <li>Team B</li>
+                        <li>How much better Team A is than Team B</li>
+                        <li>Match Number</li>
+                        <li>If a robot in that comparison was incapacitated for some reason</li>
+                    </ul>
+
+                    (More on the specifics of each of these data fields in the other help pages.) <br><br>
+
+                    Data is generated in an alliance-by-alliance 
+"tiermaker" format, where the only teams you are considering are the 
+teams currently on the field with blue (or red)
+                    bumpers attached. Everything is completly in 
+isolation, as if these are the only 3 robots in the entire world.<br><br>
+
+                    There is TBA integration to automatically load the 
+teams that will be playing for that match. You just need to supply the 
+event code and the match number, then press
+                    the "request teams" button. The event code can be 
+found by looking at the URL in The Blue Alliance. <br><br>
+
+
+                    For example, the event code for the APTIV division at the 2023 Michigan State Championship:<br><br>
+
+                    <li class="listshift">https://www.thebluealliance.com/event/<strong>2023micmp3</strong></li><br>
+
+                    ... or the 2022 Hueneme Port Regional: <br><br>
+                    <li class="listshift">https://www.thebluealliance.com/event/<strong>2022caph</strong></li> <br><br>
+
+                    Teams for matches will only load in if a match 
+schedule exists and the match you're requesting is valid. If it is not 
+working double check the event code and that a match
+                    schedule is avalible for that year at that event. 
+Worst case scenerio you can carefully manually enter the team numbers as
+ the matches occur - be sure to double check
+                    that they are correct (manual entery can be a little
+ clunky on mobile browsers at the moment). Example use below:<br><br>
+
+                    <img src="Pairwise%20-%20Tutorial_basic_files/TBA_request_match.gif" width="50%" alt="TBA- Request teams for event and match">
+
+                    <h4>Hardware and Software</h4>
+                    To use Pairwise with as little effort as possible we
+ are going to assume an mobile device connected to cellular internet 
+(not guarenteed in all venues!). <br><br>
+
+                    You will also need a notes app or somewhere to 
+copy/paste data; any simple notes app, a google sheet/doc, etc. will do.
+ At the moment Pairwise does not support data storage.
+
+                    <h4>Collecting data from Matches</h4>
+                    Let us suppose you find yourself going into an event
+ with two very fast and nimble robots that are likely to be on the first
+ alliance. You find yourself down the order a little bit -
+                    competative for sure but there is a very slim chance
+ you are going to beat that likely first alliance paring on pute 
+firepower alone. You decide you stand a chance if you can play the 
+physical
+                    game - where you have a bunch of bots tat are not 
+afraid to trade a little paint and land some hits. So let's focus on 
+collecting data on robots that are not afraid to throw their
+                    weight around while scoring. From before:<br><br>
+
+                    <ul desireable="" charateristics="">
+                        <li>Minimal time spent lingering at feeder station</li>
+                        <li>"Touch-it-own-it" intake</li>
+                        <li>Power through, pushing opponents out of way and gamepieces towards own goal</li>
+                        <li>Minimal to no time spent waiting to score, even at (minor) expense of alliance partners</li>
+                        <li>Not afraid to bait opponent into drawing a foul</li>
+                        <li>Oppertunistic defense to slow opponent down more than it costs themselves in time (i.e. knock opponent gamepiece loose)</li>
+                    </ul>
+                    <ul undesireable="" charateristics="">
+                        <li>Hesitent or waiting for opponents to get out of way</li>
+                        <li>Avoiding contact or giving up gampiece to opponent  bots</li>
+                        <li>ovoiding entering opponent zones if there is no risk of foul</li>
+                        <li>Gamepieces stuck in robot causing delays in scoring</li>
+                    </ul>
+
+                    <br><br>
+                    With this in mind, we start ranking the teams in 
+each alliance by paying careful attention during eatch match and 
+discussing our observations with
+                    a partner. The goal is: no matter how small the 
+differences between teams there should be relativly better teams on 
+alliances and relativly worse teams. In matches
+                    where you are playing you need to be honest with 
+yourself if your own team is actually performing better or worse than 
+others, this can be difficult. Example use of
+                    ordering teams by dragging them below:<br><br>
+
+                    <img src="Pairwise%20-%20Tutorial_basic_files/Tier_movement_useage.gif" width="50%" alt="Drag teams onto tiers to rank them best to worse"> <br><br>
+
+
+                    Ordering the teams automatically generates the 
+pairwise comparisons that are used to later construct rankings. We can 
+use to copy button to automatically copy all the data and then
+                    paste it in a notes app, google doc, etc. We can 
+then reset the tool and load in the teams for the next match.<br><br>
+
+                    <img src="Pairwise%20-%20Tutorial_basic_files/Copy_and_reset.gif" width="50%" alt="Copy rankings and reset tool">
+
+
+                <p></p>
+
+            </section>
+
+            <section id="analysis">
+                <h2>Analyzing the data</h2>
+                <p>
+                   More info coming soon!
+                </p>
+
+                <p></p>
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <!-- Footer content if needed -->
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('aside');
+            const sidebarNav = document.querySelector('#sidebarNav');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                sidebarHeader.classList.toggle('collapsed');
+                sidebarNav.classList.toggle('collapsed');
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(e,t) { return this._call('downloadPdfs', [e,t]); },
+  open() { return this._call('open', []); },
+  setLoginToken(e) { return this._call('setLoginToken', [e]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.6124056484754601', methodName, methodArgs }, 'https://www.pythonanywhere.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>

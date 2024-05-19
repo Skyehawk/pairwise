@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/dashlane-tiresias-page-script.js" id="dashlane_tiresias"></script><script src="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/dashlane-webauthn-page-script.js" id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <title>Pairwise - Data Input &amp; Formatter</title>
+    <link rel="icon" type="image/x-icon" href="https://www.pythonanywhere.com/static/images/logo3_mini.png">
+    <!-- Include Ion Range Slider CSS -->
+    <link rel="stylesheet" href="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/ion.rangeSlider.min.css">
+    <!-- clipboard icon class for copy button-->
+    <link rel="stylesheet" href="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/all.min.css">
+    <!-- TBA API -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@the-blue-alliance/api-client@4/dist/bundle.js"></script> -->
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        header {
+            margin: 5px 0; /* Adjust the margin as needed */
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Styles for sidebar */
+        aside {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 20%;
+            overflow: auto;
+            transition: width 0.3s ease;
+        }
+
+        aside.collapsed {
+            width: 25px;
+        }
+
+        .sidebar-header,
+        #sidebarNav {
+            transition: display 0.3s ease;
+        }
+
+        .sidebar-header.collapsed,
+        #sidebarNav.collapsed {
+            display: none;
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+                text-align: center; /* Center align the logo */
+                padding-top: 10px; /* Adjust top padding as needed */
+        }
+
+        .logo img {
+            width: 50px; /* Set the width as needed */
+            height: auto;
+            /*margin-right: 20px;*/ /* Adjust spacing between logo and links */
+        }
+
+    /* Style for navbar dropdown menu */
+        .navbar {
+            text-align: center;
+            background-color: #f2f2f2;
+            overflow: visible; /* Adjust overflow */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1; /* Ensure dropdowns appear on top */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2; /* Adjust z-index to appear above other elements */
+            padding: 0;
+            top: 100%; /* Show below the navbar */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            padding: 14px 16px; /* Adjust padding on hover */
+            display: block;
+            width: 100%; /* Make the link cover the entire width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        /* warnings and notice style */
+        .notice {
+          background-color: #fff6bf; /* Yellow color */
+          padding: 15px;
+          border-radius: 5px;
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+          width: fit-content;
+          margin: 20px; /* Adding 20px margin around the box */
+        }
+
+    /* Style for the TBA match inputs container */
+        #TBA-input-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 20px; /* Adding 20px margin around the box */
+        }
+
+        .match-input-label {
+            margin-right: 10px;
+        }
+
+        /* Grid (simple input) CSS Styles */
+        .container {
+            display: flex;
+            margin: 10px;
+        }
+
+        .sidebar {
+            flex: 0 0 15%;
+            background-color: #f0f0f0;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        .calculator-container {
+            flex: 0 0 85%;
+            background-color: #e0e0e0;
+            padding: 10px;
+            display: vertical;
+            justify-content: space-between;
+        }
+
+        .tiers-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align tiers at the top */
+        }
+
+        .controls-container {
+            display: flex;
+            justify-content: center;*/
+            align-items: center;
+            padding: 20px;
+            margin-top: 10px; /* Adjust this margin as needed */
+        }
+
+    /* Specific styles for the tier maker */
+        .tier {
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center; /* Center items vertically */
+            justify-content: flex-start; /* Align items at the start */
+            flex-wrap: nowrap; /* Prevent items from wrapping */
+            margin-top: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 100px;
+        }
+
+        .blue-tier {
+            background-color: lightblue;
+        }
+
+        .red-tier {
+            background-color: #ffe6e6;
+        }
+
+         .draggable {
+            /*cursor: pointer;*/
+            /*display: flex;*/
+            /*align-items: center;*/
+            /*justify-content: center;*/
+            /*width: 140px; /* Adjusted width for wider rectangles */
+            height: 70px;
+            font-size: 20px;
+            font-weight: normal;
+            touch-action: none;  /* prevent the autoscaling (at least on some devices) when an element is draggged from one tier to another and it is off the screen*/
+            /*border: 1px solid black;*/
+        }
+
+
+        input {
+            display: block;
+            margin-bottom: 5px;
+            width: 80%; /* Adjust width as needed */
+            max-width: 25%;
+            max-length: 20; /* Maximum character length */
+        }
+
+        .blue-input,
+        .red-input {
+            margin-right: 10px; /* Add space between inputs */
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 100px; /* Adjust width as needed */
+            text-align: center;
+        }
+
+        .blue-side,
+        .red-side {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        /* Center inputs for blue and red */
+        .blue-input-container,
+        .red-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .tier-label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        .blue-tier-label {
+            color: darkblue;
+        }
+
+        .red-tier-label {
+            color: darkred;
+        }
+
+    /* Styles for slider container */
+        .slider-container {
+          width: 80%;
+          margin-left: 20px; /* add margin to seperate sliders from sidebar */
+          margin-top: 30px;
+          margin-bottom: 20px;
+          padding: 20px;
+        }
+        .slider-column {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Styles for labels */
+        .result-labels {
+          margin-top: 20px;
+        }
+
+        .result-labels label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        /* Increase the height/thickness of the slider bars */
+        .irs--flat .irs-bar {
+          height: 25px; /* Adjust this value to increase/decrease the thickness */
+        }
+        .irs--flat .irs-line {
+          height: 25px; /* Adjust this value to increase/decrease the height */
+          background-color: lightgray; /* Change this to the desired color */
+        }
+        /* Adjust the height and width of the slider handle */
+        .irs--flat .irs-handle {
+          height: 32px; /* Adjust this value to change the height */
+          width: 15px; /* Adjust this value to change the width */
+          margin-top: 0px; /* Adjust this value to properly center the handle */
+          margin-left: 0px; /* Adjust this value to properly center the handle */
+        }
+
+        /* Blue slider styles */
+        .blue-slider .irs--flat .irs-handle>i:first-child {
+          background-color: #4e73df!important;
+        }
+
+        .blue-slider .irs--flat .irs-bar {
+          background-color: #4e73df!important;
+        }
+
+        .blue-slider .irs--flat .irs-from,
+        .blue-slider .irs--flat .irs-to,
+        .blue-slider .irs--flat .irs-single {
+          background-color: #4e73df!important;
+        }
+
+        .blue-slider .irs--flat .irs-from:before,
+        .blue-slider .irs--flat .irs-to:before,
+        .blue-slider .irs--flat .irs-single:before {
+          border-top-color: #4e73df!important;
+        }
+
+
+    /* copy button */
+        .height2em {
+            margin-top: 10px;
+            padding: 20px; /* Adding 10px padding */
+            height: 2em; /* Making the height twice the default */
+            display: flex; /* Using flexbox */
+            align-items: center; /* Vertically centering the text */
+        }
+
+     /* sidebar stuff to remove bullets, shift elements, adjust controls */
+        ul {
+          list-style: none; /* Remove bullets */
+          padding-left: 0; /* Remove default padding */
+          margin-left: -3em; /* Shift list to the left by 3em */
+        }
+
+        li {
+          text-indent: 3em; /* Indent content by 3em */
+          padding-bottom: 5px; /* Add padding between list items */
+        }
+
+        .sidebar-container {
+          text-align: center;
+          margin-top: 20px; /* Adjust as needed */
+        }
+
+        .slider-width50 {
+            width: 50%; /* 50%-width */
+            position: relative;
+            /*left: 25%; /* Change this value to adjust the shift percentage */
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="logo">
+        <img src="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/logo3.jpeg" alt="Logo">
+    </div>
+
+    <div class="navbar">
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/">Home</a>
+            <div class="dropdown-content">
+                <!-- Your home content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Tools</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/file-processing">File Processing Tool</a>
+                <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/stats">Usage Stats</a>
+            <div class="dropdown-content">
+                <!-- Your stats content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">About</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/about">About the Project</a>
+                <a href="https://www.pythonanywhere.com/change-log">Change Log, Todo &amp; Bugs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Help</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/help-overview">Overview</a>
+                <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a>
+                <a href="https://www.pythonanywhere.com/help-SVD">Data Processing</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h2>Pairwise - Data Input &amp; Formatter Tool</h2>
+    </header>
+
+    <main>
+        <aside>
+            <div class="sidebar-toggle">☰</div>
+            <h2 class="sidebar-header">Settings</h2>
+            <div class="sidebar-container">
+                <ul id="sidebarNav">
+                    <li>
+                        <input type="checkbox" id="advancedCheckbox"> Advanced Mode
+                    </li>
+                    <div id="sidebarAdvControls" style="display: none;">
+                        <li>
+                            <label for="minValueInput">Min Value:</label>
+                            <input type="number" id="minValueInput" min="-100" max="99" step="10" value="-1" style="width: 4em;">
+                        </li>
+
+                        <li>
+                            <label for="maxValueInput">Max Value:</label>
+                            <input type="number" id="maxValueInput" min="-99" max="100" step="10" value="1" style="width: 4em;">
+                        </li>
+
+                        <li>
+                            <label for="gridDivisions">Grid Divisions</label>
+                            <input class="slider-width50" type="range" id="gridDivisions" min="1" max="20" value="2">
+                            <span id="gridDivisionsValue">2</span>
+
+                        </li>
+                    </div>
+
+                </ul>
+            </div>
+        </aside>
+
+
+        <div class="slider-column" data-dashlane-rid="da5e880b72f7d0c4" data-form-type="other">
+            <!-- Notice/ Announcments -->
+            <!--<div class="notice">-->
+            <!--    <p><strong>Notice:</strong><br><br>Touch support is currently not supported for-->
+            <!--        drag-and-drop in the simple data input tool - this-->
+            <!--        means it will not work with touch input and requires-->
+            <!--        a mouse. <br>-->
+
+            <!--        Implementing touch support for the simple data input mode-->
+            <!--        is of extreme high priority ahead of-->
+            <!--        the 2024 competition season, this is partially completed and-->
+            <!--        in the process of being implemented here. Touch support-->
+            <!--        exists on the sliders (Advanced mode) with the same-->
+            <!--        functionality, however the advanced data input &-->
+            <!--        formatter tool is less intuitive. Please see the help-->
+            <!--        documentation on using the advanced mode for touch support.-->
+            <!--    </p>-->
+            <!--</div>-->
+
+
+            <!-- TBA match input container -->
+            <div id="TBA-input-container">
+                <label for="eventCode">Event Code:</label>
+                <input class="match-input-label" type="text" id="eventCode" value="2023mijac" style="width: 8em;" data-dashlane-rid="36759c6ca9fec502" data-form-type="other">
+                <label for="matchNumber">Match Number:</label>
+                <input class="match-input-label" type="number" id="matchNumber" min="-1" max="9999" value="1" style="width: 3em;" data-dashlane-rid="91ce72f4c57b81e5" data-form-type="other">
+                <button onclick="getTeams()" data-dashlane-label="true" data-dashlane-rid="0573375c4ef059c8" data-form-type="other">Request Teams</button>
+            </div>
+
+            <!-- Simple Calculator -->
+            <div id="defaultCalculator" class="calculator-container" style="display: block;">
+                <!-- Calculator content here -->
+                <div class="controls-container">
+                    <button padding="20px" onclick="resetTiers()" data-dashlane-label="true" data-dashlane-rid="912ebd628ca46fba" data-form-type="other">Reset Tiers</button>
+                </div>
+
+                <div class="tiers-container">
+                    <div class="blue-side">
+                        <!-- Blue side content -->
+                        <div id="blueTopTier" class="tier blue-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label blue-tier-label">Best Team(s) on Blue Alliance</div>
+                        </div>
+                        <div id="blueMidTier" class="tier blue-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label blue-tier-label">Middle Team(s) on Blue Alliance</div>
+                        </div>
+                        <div id="blueLowTier" class="tier blue-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label blue-tier-label">Worst Team(s) on Blue Alliance</div>
+                        </div>
+                        <div class="blue-input-container">
+                            <input type="text" id="teamInput4" class="blue-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="78325ea0f024740c" data-form-type="other">
+                            <input type="text" id="teamInput5" class="blue-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="d50040ebdeea982b" data-form-type="other">
+                            <input type="text" id="teamInput6" class="blue-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="eb2e1e1e56a424ec" data-form-type="other">
+                        </div>
+                    </div>
+
+                    <div class="red-side">
+                        <!-- Red side content -->
+                        <div id="redTopTier" class="tier red-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label red-tier-label">Best Team(s) on Red Alliance</div>
+                        </div>
+                        <div id="redMidTier" class="tier red-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label red-tier-label">Middle Team(s) on Red Alliance</div>
+                        </div>
+                        <div id="redLowTier" class="tier red-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="tier-label red-tier-label">Worst Team(s) on Red Alliance</div>
+                        </div>
+                        <div class="red-input-container">
+                            <input type="text" id="teamInput1" class="red-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="9010f6cc995e674c" data-form-type="other">
+                            <input type="text" id="teamInput2" class="red-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="ee9110b9f42ede68" data-form-type="other">
+                            <input type="text" id="teamInput3" class="red-input draggable" draggable="true" ondragstart="drag(event)" ontouchstart="touchDrag(event)" maxlength="20" data-dashlane-rid="c6873976d6d73d5b" data-form-type="other">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-container">
+                    <div id="blueComparisons"></div>
+                    <button class="height2em" onclick="copyTierLabels()" data-dashlane-label="true" data-dashlane-rid="cc9d810e89c64b07" data-form-type="other">
+                        <i class="fas fa-clipboard"></i>    Copy Comparisons to Clipboard
+                    </button>
+                    <div id="redComparisons"></div>
+                </div>
+
+                <script>
+                // our inputs by color
+                    const blueInputs = document.querySelectorAll('.blue-input'); // Select blue inputs
+                    const redInputs = document.querySelectorAll('.red-input'); // Select red inputs
+
+                // Create a global variable to store the original position
+                    let originalPosition;
+
+                //timer for touch and hold to edit
+                    let editTimer;
+                    let editingElement;
+                    let lastTapTime = 0;
+
+
+                    function startEdit(element) {
+                        element.readOnly = false; // Enable editing
+                        element.focus(); // Focus on the input for editing
+                        editingElement = element; // Store the currently edited element
+                    }
+
+                    function endEdit() {
+                        if (editingElement) {
+                            editingElement.readOnly = true; // Disable editing
+                            editingElement.blur(); // Remove focus from the input
+                            editingElement = null; // Reset the editing element
+                        }
+                        console.log('Editing flag:', editingElement); // Logging editing for debugging
+                    }
+
+
+                    // Touch start event listener
+                    function touchStartHandler(event) {
+                        clearTimeout(editTimer);
+
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTapTime;
+
+                        if (tapLength < 500 && tapLength > 0) {
+                            // If another tap occurs within 500ms, consider it a double tap
+                            startEdit(event.target);
+                            clearTimeout(editTimer); // Clear the single tap timer
+                        } else {
+                            editTimer = setTimeout(() => {
+                                if (event.target.tagName.toLowerCase() === 'input') {
+                                    // If no double tap is detected within the timeframe, treat it as a single tap for dragging
+                                    drag(event);
+                                }
+                            }, 300); // Adjust this time as needed for your specific scenario
+
+                            lastTapTime = currentTime;
+                        }
+                    }
+
+                    // Touch end event listener
+                    function touchEndHandler() {
+                        clearTimeout(editTimer);
+                    }
+
+                    // Function to handle touch move
+                    function touchMoveHandler() {
+                        clearTimeout(editTimer);
+                        editingElement = null; // Release the editing element on touch move
+                    }
+
+                // drag and drop stuff handling touch events
+                    function allowDrop(event) {
+                        event.preventDefault();
+                    }
+
+                    function drag(event) {
+                        // if (event.type === 'mousedown') {  // we can use this to deal with weird scrolling, but it may pass a null to drop
+                        event.dataTransfer.setData("text", event.target.id);
+                            // Other mouse-related drag logic
+                        // }
+                    }
+
+                    function drop(event) {
+                        event.preventDefault();
+                        var data = event.dataTransfer.getData("text");
+                        var draggedElement = document.getElementById(data);
+
+                        console.log("Dragged Element ID:", data); // Log the ID of the dragged element
+
+                        if (event.target.classList.contains('tier')) {
+                            console.log("Dropped into Tier:", event.target); // Log the tier element where it's dropped
+                            event.target.appendChild(draggedElement.cloneNode(true));
+                        } else if (event.target.parentElement.classList.contains('tier')) {
+                            console.log("Dropped into Parent Tier:", event.target.parentElement); // Log the parent tier
+                            event.target.parentElement.appendChild(draggedElement.cloneNode(true));
+                        }
+
+                        // Remove the dragged element from the input container
+                        draggedElement.remove();
+
+                        updateComparisons('blue');
+                        updateComparisons('red');
+                    }
+
+
+                    function touchDrag(event) {
+                        //event.preventDefault(); // Prevent scrolling when touching an input to drag
+
+                        if (editingElement) {
+                        // If an input field is being edited, exit the touchDrag function
+                            return;
+                        }
+
+                        var touch = event.targetTouches[0];
+                        var draggedElement = event.target;
+
+                        // draggedElement.style.position = 'absolute';
+                        // draggedElement.style.left = touch.pageX - draggedElement.offsetWidth / 2 + 'px';
+                        // draggedElement.style.top = touch.pageY - draggedElement.offsetHeight / 2 + 'px';
+
+
+                        // Store the original position before dragging starts
+                        originalPosition = draggedElement.parentElement;
+
+                        function moveElement(e) {
+                            e.preventDefault();
+                            var touch = e.targetTouches[0];
+
+                            // Set the position of the dragged element relative to the page
+                            draggedElement.style.position = 'absolute';
+                            draggedElement.style.left = touch.pageX + 'px';
+                            draggedElement.style.top = touch.pageY + 'px';
+                        }
+
+                        function endDrag(e) {
+                            e.preventDefault();
+                            document.removeEventListener('touchmove', moveElement);
+                            document.removeEventListener('touchend', endDrag);
+
+                            var touchX = e.changedTouches[0].clientX;
+                            var touchY = e.changedTouches[0].clientY - (draggedElement.offsetHeight / 2) - 5; // Adjusted touch point
+
+                            var dropZone = document.elementFromPoint(touchX, touchY);
+
+                            console.log('Drop zone:', dropZone); // Logging drop zone for debugging
+
+                            // Find the nearest parent (tier) excluding the input being dragged
+                            while (dropZone && dropZone !== draggedElement && !dropZone.classList.contains('tier')) {
+                                dropZone = dropZone.parentElement;
+                            }
+
+                            console.log('Final drop zone:', dropZone); // Logging final drop zone for debugging
+
+                            // Validate the dragged element against the drop zone (tier) and its color
+                            if (dropZone && dropZone.classList.contains('tier')) {
+                                const draggableColor = draggedElement.classList.contains('blue-input') ? 'blue' : 'red';
+                                const tierColor = dropZone.classList.contains('blue-tier') ? 'blue' : 'red';
+
+                                console.log('Draggable color:', draggableColor); // Logging draggable color for debugging
+                                console.log('Tier color:', tierColor); // Logging tier color for debugging
+
+                                if (draggableColor === tierColor) {
+                                    // Valid drop zone for the dragged element
+                                    dropZone.appendChild(draggedElement);
+                                    draggedElement.style.position = 'static'; // or 'relative' based on layout needs
+                                    draggedElement.style.display = 'block'; // Make sure it's visible if it was hidden
+                                } else {
+                                    // If dropped into a tier of different color, reset the dragged element's position
+                                    console.log('Dropped into a tier of different color or outside a valid tier.');
+                                    resetDraggedElement();
+                                }
+                            } else {
+                                // If dropped outside a valid tier, reset the dragged element's position
+                                console.log('Dropped outside a valid tier.');
+                                resetDraggedElement();
+                            }
+                        }
+
+                        function resetDraggedElement() {
+                            if (originalPosition) {
+                                originalPosition.appendChild(draggedElement);
+                                draggedElement.style.position = 'static'; // or 'relative' based on layout needs
+                                draggedElement.style.left = 'auto';
+                                draggedElement.style.top = 'auto';
+                                originalPosition = null;
+                            }
+                        }
+
+
+                        document.addEventListener('touchmove', moveElement, { passive: false });
+                        document.addEventListener('touchend', endDrag);
+
+                        updateComparisons('blue');
+                        updateComparisons('red');
+
+                    }
+
+                    // Attach touch event listeners
+                    document.addEventListener('touchstart', touchStartHandler);
+                    document.addEventListener('touchmove', touchMoveHandler);
+                    document.addEventListener('touchend', touchEndHandler);
+
+                    function resetTiers() {
+                        const blueInputs = document.querySelectorAll('.blue-tier input');
+                        const redInputs = document.querySelectorAll('.red-tier input');
+
+                        const blueInputContainer = document.querySelector('.blue-input-container');
+                        const redInputContainer = document.querySelector('.red-input-container');
+
+                        blueInputs.forEach(input => {
+                            blueInputContainer.appendChild(input); // Move blue tier inputs back to blue input container
+                            input.style.position = 'static'; // Reset the input's position
+                        });
+
+                        redInputs.forEach(input => {
+                            redInputContainer.appendChild(input); // Move red tier inputs back to red input container
+                            input.style.position = 'static'; // Reset the input's position
+                        });
+
+                        updateComparisons('blue');
+                        updateComparisons('red');
+                    }
+
+
+                    function generateComparisons(tierColor) {
+                        match_num = document.getElementById('matchNumber').value
+                        const tierElements = document.querySelectorAll(`.${tierColor}-tier .draggable`);
+                        const comparisons = [];
+                        const comparedPairs = new Set(); // Store compared pairs
+                        const tierMap = new Map(); // Store tier levels for each draggable element
+
+                        console.log(`Selected ${tierElements.length} draggable elements.`);
+
+                        tierElements.forEach((draggable) => {
+                            const tierID = draggable.parentElement.id;
+
+                            let tierValue = 0; // Default tier value if not found
+
+                            // Assign tier levels based on tier ID
+                            if (tierID === 'redTopTier' || tierID === 'blueTopTier') {
+                                tierValue = 2;
+                            } else if (tierID === 'redMidTier' || tierID === 'blueMidTier') {
+                                tierValue = 1;
+                            } else if (tierID === 'redLowTier' || tierID === 'blueLowTier') {
+                                tierValue = 0;
+                            } else {
+                                tierValue = NaN;
+                            }
+
+                            const inputText = draggable.value;
+
+                            tierMap.set(inputText, tierValue);
+                        });
+
+                        // Compare tier levels of draggable elements across the tier
+                        tierMap.forEach((tierVal1, key1) => {
+                            tierMap.forEach((tierVal2, key2) => {
+                                if (key1 !== key2) {
+                                    const pair1 = `${key1},${key2}`;
+                                    const pair2 = `${key2},${key1}`;
+
+                                    if (!comparedPairs.has(pair1) && !comparedPairs.has(pair2)) {
+                                        const diff = tierVal1 - tierVal2;
+                                        const comparisonResult = diff >= 0 ?
+                                            `${key1}, ${key2}, ${diff}, ${match_num}` :
+                                            `${key2}, ${key1}, ${Math.abs(diff)}, ${match_num}`;
+                                        comparisons.push(comparisonResult);
+
+                                        comparedPairs.add(pair1);
+                                    }
+                                }
+                            });
+                        });
+
+                        // Use 'comparisons' array for further processing or logging
+                        console.log(comparisons);
+
+                        return comparisons; // send comparisons back to calling finction (updataComparisons)
+                    }
+
+                    function updateComparisons() {
+                        const blueComparisons = generateComparisons('blue');
+                        const redComparisons = generateComparisons('red');
+                        console.log(blueComparisons);
+                        console.log(redComparisons);
+
+                        document.getElementById('blueComparisons').innerText = blueComparisons.join('\n');
+                        document.getElementById('redComparisons').innerText = redComparisons.join('\n');
+                    }
+
+                    function copyTierLabels() {
+
+                        // get the most recent data
+                        updateComparisons('blue');
+                        updateComparisons('red');
+
+                        // Get the text from labels
+                        const labelBlueText = document.getElementById('blueComparisons').innerText;
+                        const labelRedText = document.getElementById('redComparisons').innerText;
+
+                        // Concatenate label texts
+                        const allLabelText = labelBlueText + '\n' + labelRedText ;
+
+                        // Create a textarea element to store the text temporarily
+                        const textArea = document.createElement('textarea');
+                        textArea.value = allLabelText;
+
+                        // Append the textarea to the body
+                        document.body.appendChild(textArea);
+
+                        // Select the text in the textarea
+                        textArea.select();
+
+                        // Copy the text to clipboard
+                        document.execCommand('copy');
+
+                        // Remove the textarea
+                        document.body.removeChild(textArea);
+
+                        // Alert that text has been copied (You can replace this with your own feedback mechanism)
+                        alert('Data copied to clipboard!');
+                    }
+
+
+                    // call these initially to get comparisons in output even though they are all sitting in the input container
+                    updateComparisons('blue');
+                    updateComparisons('red');
+
+
+                </script>
+
+            </div>
+
+            <!-- Advanced calculator -->
+            <div id="advancedCalculator" style="display: none;">
+                <button class="height2em" onclick="copyLabels()">
+                <i class="fas fa-clipboard"></i>  Copy Comparisons to Clipboard
+                </button>
+
+                <!-- Blue Sliders and text inputs -->
+                <div class="slider-container blue-slider">
+                    <input type="text" id="teamInput4adv" class="text-input">
+                    <span class="irs irs--flat js-irs-0 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput4" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                </div>
+
+                <div class="slider-container blue-slider">
+                    <input type="text" id="teamInput5adv" class="text-input">
+                    <span class="irs irs--flat js-irs-1 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput5" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                </div>
+
+                <div class="slider-container blue-slider">
+                    <input type="text" id="teamInput6adv" class="text-input">
+                    <span class="irs irs--flat js-irs-2 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput6" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                </div>
+
+                <!-- Blue Result labels with increased space -->
+                <div class="result-labels blue-slider">
+                    <label id="label4">NaN, NaN, 0, 1</label>
+                    <label id="label5">NaN, NaN, 0, 1</label>
+                    <label id="label6">NaN, NaN, 0, 1</label>
+                </div>
+
+                <!-- Include jQuery and Ion Range Slider for Blue Sliders -->
+                <script src="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/jquery.min.js"></script>
+                <script src="Pairwise%20-%20Data%20Input%20&amp;%20Formatter_exp_files/ion.rangeSlider.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                    function updateLabelsBlue() {
+                        match_num = document.getElementById('matchNumber').value
+
+                        const slider4 = parseFloat($("#sliderInput4").val());
+                        const slider5 = parseFloat($("#sliderInput5").val());
+                        const slider6 = parseFloat($("#sliderInput6").val());
+
+                        const team4 = parseFloat($("#teamInput4adv").val());
+                        const team5 = parseFloat($("#teamInput5adv").val());
+                        const team6 = parseFloat($("#teamInput6adv").val());
+
+                        const diff4 = slider4 - slider5;
+                        const diff5 = slider5 - slider6;
+                        const diff6 = slider4 - slider6;
+
+                        document.getElementById('label4').innerText = generateLabelText(team4, team5, diff4, match_num);
+                        document.getElementById('label5').innerText = generateLabelText(team5, team6, diff5, match_num);
+                        document.getElementById('label6').innerText = generateLabelText(team4, team6, diff6, match_num);
+                    }
+
+                    function generateLabelText(val1, val2, diff, match_num) {
+
+                        let label = `${val1}, ${val2}, ${diff >= 0 ? diff : Math.abs(diff)}, ${match_num}`;
+                        if (diff < 0) {
+                        label = `${val2}, ${val1}, ${Math.abs(diff)}, ${match_num}`;
+                        }
+                        return label;
+                    }
+
+                    // Initialize Blue Ion Range Sliders
+                    $(".blue-slider .slider-input").ionRangeSlider({
+                        min: -1,
+                        max: 1,
+                        from: 0,
+                        grid: true,
+                        grid_num: 2, // This sets the number of ticks
+                        grid_snap: false, // Disables snapping to ticks
+                        onChange: updateLabelsBlue,
+                    });
+
+                    $(".blue-slider .text-input").on('input', function() {
+                        updateLabelsBlue();
+                    });
+
+                    updateLabelsBlue();
+                    });
+                </script>
+
+
+
+
+                <!-- Red Sliders and text inputs -->
+                <div class="slider-container">
+                    <input type="text" id="teamInput1adv" class="text-input">
+                    <span class="irs irs--flat js-irs-3 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput1" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                </div>
+
+                <div class="slider-container">
+                    <input type="text" id="teamInput2adv" class="text-input">
+                    <span class="irs irs--flat js-irs-4 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput2" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                 </div>
+
+                <div class="slider-container">
+                    <input type="text" id="teamInput3adv" class="text-input">
+                    <span class="irs irs--flat js-irs-5 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min">-1</span><span class="irs-max">1</span><span class="irs-from" style="visibility: hidden;">0</span><span class="irs-to" style="visibility: hidden;">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">-1</span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-1" style="left: 50%; visibility: hidden;">0</span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-2" style="left: 100%; visibility: hidden;">1</span></span><span class="irs-bar irs-bar--single"></span><span class="irs-shadow shadow-single"></span><span class="irs-handle single"><i></i><i></i><i></i></span></span><input type="text" id="sliderInput3" class="slider-input irs-hidden-input" tabindex="-1" readonly="readonly" value="0">
+                </div>
+
+                <!-- Red Result labels -->
+                <div class="result-labels">
+                    <label id="label1">NaN, NaN, 0, 1</label>
+                    <label id="label2">NaN, NaN, 0, 1</label>
+                    <label id="label3">NaN, NaN, 0, 1</label>
+                </div>
+
+                <!-- Include jQuery and Ion Range Slider for Red Sliders -->
+                <script>
+                    $(document).ready(function() {
+                    function updateLabelsRed() {
+                        match_num = document.getElementById('matchNumber').value
+
+                        const slider1 = parseFloat($("#sliderInput1").val());
+                        const slider2 = parseFloat($("#sliderInput2").val());
+                        const slider3 = parseFloat($("#sliderInput3").val());
+
+                        const team1 = parseFloat($("#teamInput1adv").val());
+                        const team2 = parseFloat($("#teamInput2adv").val());
+                        const team3 = parseFloat($("#teamInput3adv").val());
+
+                        const diff1 = slider1 - slider2;
+                        const diff2 = slider2 - slider3;
+                        const diff3 = slider1 - slider3;
+
+                        document.getElementById('label1').innerText = generateLabelText(team1, team2, diff1, match_num);
+                        document.getElementById('label2').innerText = generateLabelText(team2, team3, diff2, match_num);
+                        document.getElementById('label3').innerText = generateLabelText(team1, team3, diff3, match_num);
+                    }
+
+                    function generateLabelText(val1, val2, diff, match_num) {
+                        let label = `${val1}, ${val2}, ${diff >= 0 ? diff : Math.abs(diff)}, ${match_num}`;
+                        if (diff < 0) {
+                        label = `${val2}, ${val1}, ${Math.abs(diff)}, ${match_num}`;
+                        }
+                        return label;
+                    }
+
+                    // Initialize Red Ion Range Sliders
+                    $(".slider-input").ionRangeSlider({
+                        min: -1,
+                        max: 1,
+                        from: 0,
+                        grid: true,
+                        grid_num: 2, // This sets the number of ticks
+                        grid_snap: false, // Disables snapping to ticks
+                        onChange: updateLabelsRed,
+                    });
+
+                    $(".text-input").on('change', function() {
+                        updateLabelsRed();
+                    });
+
+                    updateLabelsRed();
+                    });
+                </script>
+
+                <!-- Update sliders from sidebar settings -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const minValueInput = document.getElementById('minValueInput');
+                        const maxValueInput = document.getElementById('maxValueInput');
+                        // const snappingCheckbox = document.getElementById('snappingCheckbox');
+                        const gridDivisions = document.getElementById('gridDivisions');
+                        const gridDivisionsValue = document.getElementById('gridDivisionsValue');
+
+                        const blueSliders = $(".blue-slider .slider-input");
+                        const blueTextInputs = $(".blue-slider .text-input");
+
+                        const redSliders = $(".slider-input:not(.blue-slider .slider-input)");
+                        const redTextInputs = $(".text-input:not(.blue-slider .text-input)");
+
+                        function updateLabels(sliders, textInputs) {
+                            // Function to update the slider labels based on the current values
+                            // This function is reused for both sets of sliders
+                        }
+
+                        function updateSliders(sliders, textInputs) {
+                            const minVal = parseInt(minValueInput.value);
+                            const maxVal = parseInt(maxValueInput.value);
+                            const gridNum = parseInt(gridDivisions.value);
+                            // const gridSnap = snappingCheckbox.checked;
+
+                            sliders.each(function() {
+                                $(this).data('ionRangeSlider').update({
+                                    min: minVal,
+                                    max: maxVal,
+                                    grid_num: gridNum,
+                                    //grid_snap: true
+                                });
+                            });
+
+                            textInputs.trigger('input'); // Trigger input event to update labels
+                        }
+
+                        minValueInput.addEventListener('change', function() {
+                            updateSliders(blueSliders, blueTextInputs);
+                            updateSliders(redSliders, redTextInputs);
+                        });
+
+                        maxValueInput.addEventListener('change', function() {
+                            updateSliders(blueSliders, blueTextInputs);
+                            updateSliders(redSliders, redTextInputs);
+                        });
+
+                        // snappingCheckbox.addEventListener('change', function() {
+                        //     updateSliders(blueSliders, blueTextInputs);
+                        //     updateSliders(redSliders, redTextInputs);
+                        // });
+
+                        gridDivisions.addEventListener('input', function() {
+                            gridDivisionsValue.innerText = gridDivisions.value;
+                            updateSliders(blueSliders, blueTextInputs);
+                            updateSliders(redSliders, redTextInputs);
+                        });
+
+                        // Update on page load
+                        gridDivisionsValue.innerText = gridDivisions.value;
+                        updateSliders(blueSliders, blueTextInputs);
+                        updateSliders(redSliders, redTextInputs);
+                    });
+                </script>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+
+    <!-- TBA get teams for match -->
+    <script>
+        function getTeams() {
+            const eventCode = document.getElementById('eventCode').value;
+            const matchNumber = document.getElementById('matchNumber').value;
+
+            fetch('/get_teams', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ event_code: eventCode, match_number: matchNumber })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Received data:', data);
+
+                // Use the received data to set defaults in text boxes
+                document.getElementById('teamInput1').value = data.red_teams[0];
+                document.getElementById('teamInput2').value = data.red_teams[1];
+                document.getElementById('teamInput3').value = data.red_teams[2];
+                document.getElementById('teamInput4').value = data.blue_teams[0];
+                document.getElementById('teamInput5').value = data.blue_teams[1];
+                document.getElementById('teamInput6').value = data.blue_teams[2];
+
+                document.getElementById('teamInput1adv').value = data.red_teams[0];
+                document.getElementById('teamInput2adv').value = data.red_teams[1];
+                document.getElementById('teamInput3adv').value = data.red_teams[2];
+                document.getElementById('teamInput4adv').value = data.blue_teams[0];
+                document.getElementById('teamInput5adv').value = data.blue_teams[1];
+                document.getElementById('teamInput6adv').value = data.blue_teams[2];
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            // TODO: Trying to force a lable update when TBI getTeams is triggered
+            // updateLabelsRed();
+            // updateLabelsblue();
+            updateComparisons();
+        }
+    </script>
+
+    <script>
+    function copyLabels() {
+        // Get the text from labels
+        const label1Text = document.getElementById('label1').innerText;
+        const label2Text = document.getElementById('label2').innerText;
+        const label3Text = document.getElementById('label3').innerText;
+        const label4Text = document.getElementById('label4').innerText;
+        const label5Text = document.getElementById('label5').innerText;
+        const label6Text = document.getElementById('label6').innerText;
+
+        // Concatenate label texts
+        const allLabelText = label1Text + '\n' + label2Text + '\n' + label3Text + '\n' + label4Text + '\n' + label5Text + '\n' + label6Text;
+
+        // Create a textarea element to store the text temporarily
+        const textArea = document.createElement('textarea');
+        textArea.value = allLabelText;
+
+        // Append the textarea to the body
+        document.body.appendChild(textArea);
+
+        // Select the text in the textarea
+        textArea.select();
+
+        // Copy the text to clipboard
+        document.execCommand('copy');
+
+        // Remove the textarea
+        document.body.removeChild(textArea);
+
+      // Alert that text has been copied (You can replace this with your own feedback mechanism)
+      alert('Data copied to clipboard!');
+    }
+    </script>
+
+
+    <!-- collapse the sidebar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('aside');
+            const sidebarNav = document.querySelector('#sidebarNav');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                sidebarHeader.classList.toggle('collapsed');
+                sidebarNav.classList.toggle('collapsed');
+            });
+        });
+    </script>
+
+
+
+    <!-- swap content of calculators -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const advancedCheck = document.getElementById('advancedCheckbox');
+            const defaultCalc = document.getElementById('defaultCalculator');
+            const advancedCalc = document.getElementById('advancedCalculator');
+            const advancedControls = document.getElementById('sidebarAdvControls');
+
+            function toggleCalculator() {
+                if (advancedCheck.checked) {
+                    advancedControls.style.display = 'block';
+                    defaultCalc.style.display = 'none';
+                    advancedCalc.style.display = 'block';
+                } else {
+                    advancedControls.style.display = 'none';
+                    defaultCalc.style.display = 'block';
+                    advancedCalc.style.display = 'none';
+                }
+            }
+
+            // Call the function on page load
+            toggleCalculator();
+
+            // Add event listener to the checkbox
+            advancedCheck.addEventListener('change', toggleCalculator);
+        });
+    </script>
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(e,t) { return this._call('downloadPdfs', [e,t]); },
+  open() { return this._call('open', []); },
+  setLoginToken(e) { return this._call('setLoginToken', [e]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.49562163211857', methodName, methodArgs }, 'https://www.pythonanywhere.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Pairwise%20-%20Help_files/dashlane-tiresias-page-script.js" id="dashlane_tiresias"></script><script src="Pairwise%20-%20Help_files/dashlane-webauthn-page-script.js" id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pairwise - Help</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            /*margin-top: 10px;*/
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+        }
+
+        header {
+            margin: 5px 0; /* Adjust the margin as needed */
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .logo {
+            text-align: center; /* Center align the logo */
+            padding-top: 10px; /* Adjust top padding as needed */
+        }
+
+        .logo img {
+            width: 50px; /* Set the width as needed */
+            height: auto;
+        }
+
+        /* Style for navbar dropdown menu */
+        .navbar {
+            text-align: center;
+            background-color: #f2f2f2;
+            overflow: visible; /* Adjust overflow */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1; /* Ensure dropdowns appear on top */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2; /* Adjust z-index to appear above other elements */
+            padding: 0;
+            top: 100%; /* Show below the navbar */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            padding: 14px 16px; /* Adjust padding on hover */
+            display: block;
+            width: 100%; /* Make the link cover the entire width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        article {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .multiline {
+          white-space: pre-wrap;
+        }
+
+        .listshift {
+        	margin-left: 0;
+            padding-left: 3em;
+            list-style-type: none;
+
+        }
+        .formatlistitem:before {
+            content: "\2022";
+            font-weight: "bold";
+            text-align: left;
+            white-space: normal;
+            display: inline-block;
+            padding: 0;
+            /*padding-left: 1em;*/
+            margin: 0 0 0 -2em;
+            width: 1em;
+        }
+
+        /* Styles for the collapsed sidebar and toggle button */
+        aside {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 20%;
+            overflow: auto;
+            transition: width 0.3s ease; /* Smooth transition for collapsing */
+        }
+
+        aside.collapsed {
+            width: 25px; /* Set the collapsed width as needed */
+        }
+
+        .sidebar-header,
+        #sidebarNav {
+            transition: display 0.3s ease; /* Smooth transition for header and list */
+        }
+
+        .sidebar-header.collapsed,
+        #sidebarNav.collapsed {
+            display: none; /* Hide the header and list when collapsed */
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust other styles as needed for the collapsed sidebar */
+        aside:not(.collapsed) ul {
+            /* Your existing sidebar styles */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+
+        /* Additional styles for the help page */
+        /* ... */
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="Pairwise%20-%20Help_files/logo3.jpeg" alt="Logo">
+    </div>
+
+    <div class="navbar">
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/">Home</a>
+            <div class="dropdown-content">
+                <!-- Your home content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Tools</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/file-processing">File Processing Tool</a>
+                <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="https://www.pythonanywhere.com/stats">Usage Stats</a>
+            <div class="dropdown-content">
+                <!-- Your stats content here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">About</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/about">About the Project</a>
+                <a href="https://www.pythonanywhere.com/change-log">Change Log</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Help</a>
+            <div class="dropdown-content">
+                <a href="https://www.pythonanywhere.com/help-overview">Overview</a>
+                <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a>
+                <a href="https://www.pythonanywhere.com/help-SVD">Data Processing</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h2>Pairwise - Help - Data Processing</h2>
+    </header>
+
+    <main>
+        <aside>
+            <div class="sidebar-toggle">☰</div>
+            <h2 class="sidebar-header">Navigation</h2>
+            <ul id="sidebarNav" padding-left="1em">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#concepts">Underpinning Concepts</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#faqs">FAQs &amp; Troubleshooting</a></li>
+                <li><a href="#additional-resources">Additional Resources</a></li>
+                <li><a href="#feedback">Feedback and Contact</a></li>
+            </ul>
+        </aside>
+
+        <article>
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>
+                    This help page covers a range of topics from getting started
+                    to more advanced analysis to limitations when using the Pairwise
+                    tool.
+                    <br><br>
+                    The Pairwise tool is a season-independent scouting analysis
+                    aid, capable of performing standalone rank recovery
+                    generation for all manner of tasks.
+                    The purpose of this tool is to provide scouting support for:
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">Teams that may not have enough members to scout efficiently</li>
+                        <li class="formatlistitem">Teams that may not have time to create their own data collection methods </li>
+                        <li class="formatlistitem">Teams that rely on community statistical tools </li>
+                        <li class="formatlistitem">Teams that would like a starting point based on team preference to begin scouting meetings </li>
+                        <li class="formatlistitem">Developing team comparison/analytical skills to expedite scouting meetings </li>
+                        <li class="formatlistitem">Scouting on vibes 🤙 </li>
+                    </ul>
+
+                    Pairwise is not suited for / capable of:
+                    <ul class="listshift">
+                        <li class="formatlistitem"><strong>Any</strong> form of data storage - there is a rudimentary calculator for
+                        .csv contents provided by the webapp for convienence but it is not capable of any data storage</li>
+                        <li class="formatlistitem">Analyizing existing quantitative data, if your data is already in this form you likely
+                        are better off sorting it by that metric to begin with</li>
+                        <li class="formatlistitem">Fixing pooly collected/ inconsistent data - garbage in, garbage out </li>
+                    </ul>
+
+                    The underpinning philosophy on development is this should be
+                    a tool that is instantaneously usable for data processing
+                    with no special alterations from season-to-season for
+                    game-specific tasks. Updates to Pairwise are not
+                    needed each year on kickoff, and development in the weeks
+                    leading up to during the competition season will be
+                    <strong>extremely</strong> limited and focused on bugs, not
+                    adding new features.
+                    <br><br>
+
+                    Usage is simple, relying on the pairwise comparison of items
+                    (hereafter teams) in order to reconstruct a ranking. The more
+                    observations collected, the greater the separability of teams
+                    becomes. Consistency is key in these observations; practice
+                    and a rubric may make this easier. A rudimentary calculator
+                    for the purposes of limited data generation is provided (you
+                    will need to place the calculated values in your data .csv
+                    yourself). More on this in <a href="http://www.pairwisetool.com/help#getting-started">Getting Started</a>.
+                    <br><br>
+
+                    Fundamentally, the process of ranking should encourage
+                    discussion in the stands among scouts, building team
+                    analysis skills. A picklist from these observations,
+                    generated by Pairwise, should provide a useful starting
+                    point, whereafter discussion and/or additional data can be
+                    used to adjust the Pairwise generated picklist for a team's
+                    specific needs.
+                    <br><br>
+
+                    The core functionality of the pairwise tool is provided here
+                    as a community benefit free of charge as well as in a GitHub
+                    repo and a <a href="https://colab.research.google.com/drive/15HBEACe7DIynmUbxitF1Q-bJ0XZK-TeH?usp=sharing">Google Colab notebook</a> for those who wish to have
+                    offline capabilities and contingency plans in place in the
+                    event of outages.
+
+                <p></p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="concepts">
+                <h2>Underpinning Concepts</h2>
+                <h3>Levels of data - N.O.I.R</h3>
+                <p>
+                    Any set of data can be placed into one of four categories,
+                    Nominal, Ordinal, Interval, or Ratio. These categories also
+                    known by the initialism NOIR represent the four distinct
+                    measurement scales that are used in statistics (or used for
+                    anything for that matter).
+                    </p><ul class="listshift">
+                        <li class="formatlistitem"><strong>Nominal</strong>: This is the simplest level of measurement and
+                        is just used in the grouping of items that have no distinct order.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Robot drivetrains - each robot has a type of drivetrain,
+                                how well that drivetrain performs would be a different metric</li><li>
+                                </li><li class="formatlistitem">Championship division names - different but with no
+                                meaningful order </li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Ordinal</strong>: There is an order or ranking to the data but it cannot be
+                        quantified between observations or even within the same observation.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Seed number of an alliance captain - it doesn't matter how
+                                much the first seeded team gets the position by, the second seeded team will still be
+                                next no matter what</li><li>
+                                </li><li class="formatlistitem">Award categories - some awards may be more prestigious than
+                                others, but that is not quantifiable. The Impact Award will be seen as more prestigious
+                                than a website award but the "By how much" is not necessarily answerable</li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Interval</strong>: There is an order to the measurements and an equal distance
+                        between the measurements. However, there is no absolute zero to the scale. Measurements are comparable
+                        between themselves but not to a fundamental zero point.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Match scores 
+and performance - values are comparable between matches,
+                                but the lack of a score doesn't imply a 
+lack of performance by a robot (eg. 2017 gear bracketed scoring)</li><li>
+                                </li><li class="formatlistitem">Time taken for tasks -  The time taken by a team to
+                                complete a certain task in the competition is measurable in minutes and seconds. The time
+                                intervals are consistent, but zero doesn't signify the absence of time. </li><li>
+                                </li><li class="formatlistitem">Gear Ratio Values - the actual numerical gear ratio values
+                                (e.g., 2:1, 3:1, etc.) These ratios demonstrate the quantitative relationship between
+                                the number of teeth or size of gears and help determine how much one gear rotates concerning
+                                another, influencing speed, torque, and power transmission. However, there is no "zero"; a 2:1
+                                reduction can be performed with a 20-tooth and a 10-tooth gearset or a 200-tooth and 100-tooth
+                                gearset</li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Ratio</strong>: The highest level of measurement. Data here can be ranked has equal
+                        distance between intervals and is relative to a meaningful zero point.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Mass of Robot: If students were required to measure the mass
+                                of their robot. A measured mass of zero implies the absence of mass and therefore no robot 😢 .</li><li>
+                                </li><li class="formatlistitem">Number of Points Earned: Total points earned by a team throughout
+                                the competition. This data has a true zero point, meaning a score of zero indicates an absence
+                                of points.</li><li>
+                            </li></ul>
+                        </li>
+                    </ul>
+
+
+                    Pairwise can operate with any Ordinal, Interval, or Ratio
+                    type data.
+                <p></p>
+
+                <h3>Singular Value Decomposition (SVD) Example: Ranking UK Football Clubs</h3>
+
+                <h4>Step 1: Data Collection and Comparison Matrix</h4>
+
+                <p>You have a list of pairwise comparisons of clubs that
+ can be turnd into a matrix, but it might have missing values due to 
+incomplete comparisons/observations.
+                </p><ul class="listshift">
+                    <li class="formatlistitem">Manchester United is better than Liverpool.</li>
+                    <li class="formatlistitem">Liverpool is as good as Chelsea.</li>
+                    <li class="formatlistitem">Chelsea is better than Arsenal.</li>
+                    <li class="formatlistitem">Arsenal is as good as Manchester United.</li>
+                </ul>
+                <p></p>
+
+                <table>
+                    <tbody><tr>
+                        <th></th>
+                        <th>Manchester United</th>
+                        <th>Liverpool</th>
+                        <th>Chelsea</th>
+                        <th>Arsenal</th>
+                    </tr>
+                    <tr>
+                        <td>Manchester United</td>
+                        <td>-</td>
+                        <td>1</td>
+                        <td>-1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Liverpool</td>
+                        <td>-1</td>
+                        <td>-</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Chelsea</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>-</td>
+                        <td>-1</td>
+                    </tr>
+                    <tr>
+                        <td>Arsenal</td>
+                        <td>0</td>
+                        <td>-1</td>
+                        <td>1</td>
+                        <td>-</td>
+                    </tr>
+                </tbody></table>
+
+                <h3>Step 2: Singular Value Decomposition (SVD)</h3>
+
+                <p>Just as a coach might analyze a match by breaking down different aspects like passing accuracy, defense, etc.,
+                SVD dissects the comparison matrix into three new matrices:</p>
+
+                <h4>U Matrix (Players' Skills)</h4>
+
+                <p>This matrix represents the style or characteristics of each club. Each row represents a club, and each column
+                represents a particular "style" or "skill" that contributes to fans' preferences.</p>
+
+                <table>
+                    <tbody><tr>
+                        <th></th>
+                        <th>Factor 1</th>
+                        <th>Factor 2</th>
+                        <th>Factor 3</th>
+                    </tr>
+                    <tr>
+                        <td>Manchester United</td>
+                        <td>0.5</td>
+                        <td>0.3</td>
+                        <td>-0.7</td>
+                    </tr>
+                    <tr>
+                        <td>Liverpool</td>
+                        <td>-0.6</td>
+                        <td>0.4</td>
+                        <td>0.2</td>
+                    </tr>
+                    <tr>
+                        <td>Chelsea</td>
+                        <td>0.6</td>
+                        <td>0.6</td>
+                        <td>0.3</td>
+                    </tr>
+                    <tr>
+                        <td>Arsenal</td>
+                        <td>0.1</td>
+                        <td>-0.6</td>
+                        <td>0.6</td>
+                    </tr>
+                </tbody></table>
+
+
+                <h4>S Matrix (Skill Level Importance - Diagonal Matrix)</h4>
+
+                <p>This is a diagonal matrix showing the importance or weight of each skill/style in influencing fan preferences.
+                It highlights which aspects are more crucial in determining the rankings.</p>
+
+                <table>
+                    <tbody><tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>2.5</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>2.1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1.8</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0.9</td>
+                    </tr>
+                </tbody></table>
+
+
+                <h4>Vt Matrix (Game Strategies)</h4>
+
+                <p>Similar to different strategies in a soccer match, this matrix represents how clubs employ these skills or
+                characteristics. Each column shows how much a club relies on each "style" or "skill."</p>
+
+                <table>
+                    <tbody><tr>
+                        <th></th>
+                        <th>Factor 1</th>
+                        <th>Factor 2</th>
+                        <th>Factor 3</th>
+                    </tr>
+                    <tr>
+                        <td>Manchester United</td>
+                        <td>0.5</td>
+                        <td>-0.7</td>
+                        <td>-0.4</td>
+                    </tr>
+                    <tr>
+                        <td>Liverpool</td>
+                        <td>-0.5</td>
+                        <td>-0.6</td>
+                        <td>0.6</td>
+                    </tr>
+                    <tr>
+                        <td>Chelsea</td>
+                        <td>0.6</td>
+                        <td>0.4</td>
+                        <td>-0.6</td>
+                    </tr>
+                    <tr>
+                        <td>Arsenal</td>
+                        <td>0.3</td>
+                        <td>0.1</td>
+                        <td>0.9</td>
+                    </tr>
+                </tbody></table>
+
+
+                <h3>Step 3: Completing the Matrix</h3>
+                <p>Just as a coach might predict a player's performance 
+in a match based on their overall skills, SVD helps
+                fill in missing comparisons by estimating how clubs 
+would fare against each other based on their identified "styles."</p>
+
+                <h3>Step 4: Final Rankings (Based on Completed Matrix)</h3>
+                <p>After completing the matrix and calculating rankings, the inferred rankings are:</p>
+                <ol>
+                    <li>Chelsea: 0.6</li>
+                    <li>Manchester United: 0.2</li>
+                    <li>Liverpool: 0</li>
+                    <li>Arsenal: -0.2</li>
+                </ol>
+                <p>Once the matrix is completed, SVD provides a nuanced 
+view of clubs' preferences beyond direct comparisons. It's like
+                understanding how different playing styles or strategies
+ contribute to fans' overall preferences, giving a holistic
+                view of why one club might be favored over another.
+                <br><br>
+                These rankings indicate the clubs' standings based on 
+the inferred preferences among fans, with Chelsea being the
+                most preferred and Arsenal being the least preferred in 
+this hypothetical scenario.
+                </p>
+
+                <!-- Add more content here -->
+            </section>
+
+            <section id="getting-started">
+                <h2>Getting Started</h2>
+                <p>
+                    Usage is simple. Upload a csv file, get results. "What is in
+                    this .csv file?" I hear you ask. Simple, 3 columns. We need to
+                    provide a big long list of pairwise comparisons
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">Team 1 ID (can be text like: "Ranger Robotics" or"frc3015" or a number like: 3015)</li>
+                        <li class="formatlistitem">Team 2 ID (same rules as Team 1 ID)</li>
+                        <li class="formatlistitem">Difference (How much better Team 1 is than Team 2, this can be a positive float or int, more on this later) </li>
+                    </ul>
+
+                    Below is the absolute minimum required columns to run the
+                    Pairwise tool:
+
+                <p></p>
+                <img class="multiline" src="Pairwise%20-%20Help_files/basicpairwiseusagescreenshot.PNG" alt="minimum input data">
+                <p>
+                    In these cases we have:<br>
+                    "Team 1" is better than "Team 2" by 1 (or Team 1 &gt; Team 2)<br>
+                    "Team 1" is better than "Team 2" by 0 (or Team 1 = Team 2) <br>
+                    "Team 1" is better than "Team 2" by 1 (or Team 1 &gt; Team 2)<br>
+                    ...
+                    <br>
+                    <br>
+                    <a href="https://gist.github.com/Skyehawk/242821c64c32bb82a806f52ff8ca9203">Here is a .csv with more observations</a>
+                    (the more the better!),
+                    this time with more detail on how much better Team 1
+                    than team 2 as judged by me at the time. ("Team 1" is better than "Team 2" by 3,
+                    etc) These are just some casual observations from <a href="https://www.thebluealliance.com/event/2023iltrr">Roboteer Rumble 2023</a> I made while drinking coffee and having a lazy
+                    morning watching the livesteream.
+                    <!--<script src="https://gist.github.com/Skyehawk/242821c64c32bb82a806f52ff8ca9203.js"></script> -->
+
+                    <br>
+                    This results in the following output ranking:
+                    <br>
+                    <img class="multiline" src="Pairwise%20-%20Help_files/basicpairwiseusageresultscreenshot.PNG" alt="basic usage results">
+                    <br><br>
+                    Any additional columns will be ignored by the tool for now.
+                    You are free to include notes and such in other columns,
+                    they just will not impact processing. Future development may
+                    address "ignore flags" or specific weights on observations.
+                    Those details will be addressed later and are
+                    <strong>not</strong> required to run Pairwise.
+                </p>
+
+                <p>
+                    Collecting data: <s>whereras collecting data is not a feature
+                    offered by Pairwise</s>, there are a number of strategies one
+                    can use to generate the .csv files. Here are some ideas:
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">Manually create the .csv thorough paper notes and data entry</li>
+                        <li class="formatlistitem">Automatiaclly generate the .csv through your own scouting app input</li>
+                        <li class="formatlistitem">Automatically generate the .csv through a google form input or similar</li>
+                    </ul>
+                <p></p>
+
+
+                <!-- Add more content here -->
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+                <p>
+                    Pairwise offers support for weighting the observations.
+                    Instead of specifying a &gt; or = resulting in something like: <br><br>
+
+                    "Team1" &gt; "Team2" = "Team3" <br><br>
+
+                    Which is the same as:
+                    </p><ul class="listshift">
+                        <li class="formatlistitem">"Team 1" is better than "Team 2" by 1</li>
+                        <li class="formatlistitem">"Team 2" is better than "Team 3" by 0</li>
+                        <li class="formatlistitem">"Team 1" is better than "Team 3" by 1</li>
+                    </ul>
+
+                    We can place weights on those observations, resulting in:
+                    <ul class="listshift">
+                        <li class="formatlistitem">"Team 1" is better than "Team 2" by 3</li>
+                        <li class="formatlistitem">"Team 2" is better than "Team 3" by 0</li>
+                        <li class="formatlistitem">"Team 1" is better than "Team 3" by 3</li>
+                    </ul>
+
+                    <h3>Singular Value Decomposition (SVD) with Weights Example: NHL Hockey Teams Ranking</h3>
+
+                    <h4>1. Observations &amp; Weighting:</h4>
+                    <p>The observations indicate the relative strengths between
+                    NHL teams, with specified units signifying the magnitude of
+                    preference between pairs. Let us suppose that over the
+                    course of a month the following observastions took place.
+                        </p><ul class="listshift">
+                            <li class="formatlistitem">MTL is better than TOR by 3 units</li>
+                            <li class="formatlistitem">BOS is better than NYR by 2 units</li>
+                            <li class="formatlistitem">MTL is better than BOS by 1 unit</li>
+                            <li class="formatlistitem">TOR is better than NYR by 3 units</li>
+                            <li class="formatlistitem">MTL is better than NYR by 2 units</li>
+                            <li class="formatlistitem">BOS is better than TOR by 1 unit</li>
+                            <li class="formatlistitem">TOR is better than MTL by 2 units</li>
+                            <li class="formatlistitem">NYR is better than BOS by 1 unit</li>
+                            <li class="formatlistitem">MTL is better than TOR by 1 unit</li>
+                            <li class="formatlistitem">BOS is better than NYR by 3 units</li>
+                        </ul>
+
+                    <p></p>
+
+                    <h4>2. Matrix Construction:</h4>
+                    <p>The weighted observations translate into a comparison matrix
+                    reflecting the weighted differences between teams, averaging
+                    applied where a pair of teams had multiple observations
+                    (although you could look at just the last observation or make
+                    more recent observations weight heavier in the average):</p>
+                    <table>
+                        <tbody><tr>
+                            <th></th>
+                            <th>MTL</th>
+                            <th>TOR</th>
+                            <th>BOS</th>
+                            <th>NYR</th>
+                        </tr>
+                        <tr>
+                            <td>MTL</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>0.5</td>
+                            <td>1.5</td>
+                        </tr>
+                        <tr>
+                            <td>TOR</td>
+                            <td>-2.5</td>
+                            <td>0</td>
+                            <td>-0.5</td>
+                            <td>2.5</td>
+                        </tr>
+                        <tr>
+                            <td>BOS</td>
+                            <td>-0.5</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>-2</td>
+                        </tr>
+                        <tr>
+                            <td>NYR</td>
+                            <td>-1.5</td>
+                            <td>-2.5</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody></table>
+
+                    <h4>3. Singular Value Decomposition (SVD):</h4>
+                    <p>SVD considers these weighted observations to identify
+                    underlying relationships between teams based on their
+                    weighted comparisons. The units impact the construction of
+                    the matrices (U, S, Vt) in the SVD.</p>
+
+                    <h4>4. Impact of Units:</h4>
+                    <p>Larger units in the comparison matrix suggest stronger
+                    preferences between teams, potentially influencing the
+                    resulting matrices (U, S, Vt) in the SVD process and the
+                    inferred rankings among the teams.
+
+                    </p><ol>
+                        <li>TOR (Toronto Maple Leafs): 1.125</li>
+                        <li>BOS (Boston Bruins): 0.75</li>
+                        <li>MTL (Montreal Canadiens): 0.375</li>
+                        <li>NYR (New York Rangers): 0.0</li>
+                    </ol>
+
+                    <p></p>
+
+                    <h4>5. Ranking Inference:</h4>
+                    <p>The rankings derived from the completed matrix consider
+                    the weighted observations to determine the relative s
+                    trengths of the NHL teams. Teams with larger weighted
+                    differences (higher units) in their favor might reflect
+                    higher ranks compared to those with smaller differences.</p>
+                <p></p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="faqs">
+                <h2>FAQs &amp; Troubleshooting</h2>
+                <p> Direct users on where to ask questions </p>
+                <h3>FAQs</h3>
+                <p>
+                    FAQ 1: Do you store the data submitted?
+                    <br>
+                    Answer 1 : By default no, no data or results are
+                    <strong>ever</strong> saved server side without the user's
+                    consent. If you chose to submit the data anonymously for
+                    improvment of the tool a copy is saved along with the
+                    optional memo (i.e. you could include team #, event code, or
+                    what the data represent such as endgame strength)
+                    <br><br>
+                    FAQ 2: Can I run this tool offline?
+                    <br>
+                    Answer 2: Yes! The source code for the bare algorithm is
+                    avaliable as a
+                    <a href="https://colab.research.google.com/drive/15HBEACe7DIynmUbxitF1Q-bJ0XZK-TeH?usp=sharing">Google Colab notebook</a>
+                    <br><br>
+                    FAQ 3: My team already has plenty of scouts and a data
+                    collection process, what can Pairwise do for me?
+                    <br>
+                    Answer 3: For teams with robust data collection already in
+                    place, it makes sense for Pairwise not to generate any sort
+                    of picklist that would go on the field for selection, but
+                    rather serve a supplementary role. Teams could have scouts
+                    for Red and Blue alliances submit a ranking of the three
+                    robots on those alliances; this encourages some team analysis
+                    while the match is still fresh. Then, Pairwise can generate a
+                    picklist to expedite scouting meetings so everyone can get
+                    to bed. Pairwise may also have applications where there is
+                    not time for long scouting meetings (MI District Champs),
+                    single-day events, or offseason events with no published
+                    schedule.
+                    <br><br>
+                    FAQ 4
+                    <br>
+                    Answer 4
+                    <br><br>
+                    FAQ 5
+                    <br>
+                    Answer 5
+                    <br><br>
+                </p>
+
+                <h3>Troubleshooting</h3>
+                <p>
+                    Issue: The tool generated a completely empty results file,
+                    what happened? Where are the rankings? <br>
+                    Cause: This is the result of a set of observations that
+                    could not converge in SVD.<br>
+                    Things to try: If you have observations in this form: <br><br>
+
+                        "Team 1" is better than "Team 2" by 3 <br><br>
+
+                    Try changing to binary observations, i.e. <br><br>
+
+                        "Team 1" is better than "Team 2" by 1 or
+                        "Team 1" is better than "Team 2" by 0 <br><br>
+
+                    This likely will provide more bandwidth for the underlying
+                    matrix to converge. A preprocessing tool may be developed at
+                    some point to aid users with data that does not converge,
+                    but does not currently exist.
+
+
+
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="additional-resources">
+                <h2>Additional Resources</h2>
+                <p>
+                    Pairwise operates on the principle of <a href="https://www.sciencedirect.com/science/article/abs/pii/S1063520321000233?fr=RR-2&amp;ref=pdf_download&amp;rr=7dd847563a9e114b">Rank Recovery from
+                    Limited Pairwise Observations using Low Rank Matrix Completion</a>
+                    which is implemented through <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.svd.html">Singular Value Decomposition</a>
+                    with the aid of Scipy v1.11 and Python v3.10.
+
+                    Operationally, larger teams with enough members to scout in
+                    FRC may find use in implementing Pairwise into the scouting
+                    workflow similar to how FRC 1678 (<a href="https://www.citruscircuits.org/uploads/6/9/3/4/6934550/whitepaper_2020.pdf">Citrus Circuits</a>) has in the
+                    past.
+
+
+                </p><p>
+                <!-- Add more content here -->
+            </p></section>
+
+            <section id="feedback">
+                <h2>Feedback and Contact</h2>
+                <p>
+                    Provide a way for users to give feedback or contact support.
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <!-- Footer content if needed -->
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('aside');
+            const sidebarNav = document.querySelector('#sidebarNav');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                sidebarHeader.classList.toggle('collapsed');
+                sidebarNav.classList.toggle('collapsed');
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(e,t) { return this._call('downloadPdfs', [e,t]); },
+  open() { return this._call('open', []); },
+  setLoginToken(e) { return this._call('setLoginToken', [e]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.024550842777708026', methodName, methodArgs }, 'https://www.pythonanywhere.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Pairwise%20-%20Help_data_gen_files/dashlane-tiresias-page-script.js" id="dashlane_tiresias"></script><script src="Pairwise%20-%20Help_data_gen_files/dashlane-webauthn-page-script.js" id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pairwise - Help</title>
+    <link rel="icon" type="image/x-icon" href="https://www.pythonanywhere.com/static/images/logo3_mini.png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            /*margin-top: 10px;*/
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+        }
+
+        header {
+            margin: 5px 0; /* Adjust the margin as needed */
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .logo {
+            text-align: center; /* Center align the logo */
+            padding-top: 10px; /* Adjust top padding as needed */
+        }
+
+        .logo img {
+            width: 50px; /* Set the width as needed */
+            height: auto;
+        }
+
+        /* Style for navbar dropdown menu */
+        .navbar {
+            text-align: center;
+            background-color: #f2f2f2;
+            overflow: visible; /* Adjust overflow */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1; /* Ensure dropdowns appear on top */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2; /* Adjust z-index to appear above other elements */
+            padding: 0;
+            top: 100%; /* Show below the navbar */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            padding: 14px 16px; /* Adjust padding on hover */
+            display: block;
+            width: 100%; /* Make the link cover the entire width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        article {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .multiline {
+          white-space: pre-wrap;
+        }
+
+        .listshift {
+        	margin-left: 0;
+            padding-left: 3em;
+            list-style-type: none;
+
+        }
+        .formatlistitem:before {
+            content: "\2022";
+            font-weight: "bold";
+            text-align: left;
+            white-space: normal;
+            display: inline-block;
+            padding: 0;
+            /*padding-left: 1em;*/
+            margin: 0 0 0 -2em;
+            width: 1em;
+        }
+
+        /* Styles for the collapsed sidebar and toggle button */
+        aside {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 20%;
+            overflow: auto;
+            transition: width 0.3s ease; /* Smooth transition for collapsing */
+        }
+
+        aside.collapsed {
+            width: 25px; /* Set the collapsed width as needed */
+        }
+
+        .sidebar-header,
+        #sidebarNav {
+            transition: display 0.3s ease; /* Smooth transition for header and list */
+        }
+
+        .sidebar-header.collapsed,
+        #sidebarNav.collapsed {
+            display: none; /* Hide the header and list when collapsed */
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust other styles as needed for the collapsed sidebar */
+        aside:not(.collapsed) ul {
+            /* Your existing sidebar styles */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Additional styles for the help page */
+        /* ... */
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="Pairwise%20-%20Help_data_gen_files/logo3.jpeg" alt="Logo">
+    </div>
+
+        <div class="navbar">
+            <div class="dropdown">
+                <a href="https://www.pythonanywhere.com/">Home</a>
+                <div class="dropdown-content">
+                    <!-- Your home content here -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Tools</a>
+                <div class="dropdown-content">
+                    <a href="https://www.pythonanywhere.com/file-processing">File Processing Tool</a>
+                    <a href="https://www.pythonanywhere.com/datagen">Data Input &amp; Formatter Tool</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="https://www.pythonanywhere.com/stats">Usage Stats</a>
+                <div class="dropdown-content">
+                    <!-- Your stats content here -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">About</a>
+                <div class="dropdown-content">
+                    <a href="https://www.pythonanywhere.com/about">About the Project</a>
+                    <a href="https://www.pythonanywhere.com/change-log">Change Log, Todo &amp; Bugs</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Help</a>
+                <div class="dropdown-content">
+                    <a href="https://www.pythonanywhere.com/help-overview">Overview</a>
+                    <a href="https://www.pythonanywhere.com/help-datagen">Data Collection</a>
+                    <a href="https://www.pythonanywhere.com/help-SVD">Data Processing</a>
+                    <a href="https://www.pythonanywhere.com/help-basic-tutorial">Basic Tutorial</a>
+                </div>
+            </div>
+        </div>
+
+    <header>
+        <h2>Pairwise - Help - Data Collection</h2>
+    </header>
+
+    <main>
+        <aside>
+            <div class="sidebar-toggle">☰</div>
+            <h2 class="sidebar-header">Navigation</h2>
+            <ul id="sidebarNav" padding-left="1em">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#concepts">Underpinning Concepts</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#faqs">FAQs &amp; Troubleshooting</a></li>
+                <li><a href="#additional-resources">Additional Resources</a></li>
+                <!--<li><a href="#feedback">Feedback and Contact</a></li>-->
+            </ul>
+        </aside>
+
+        <article>
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>
+                    This help page covers a variety of topics in data collection
+                    and strategies to get the most from your collected data for
+                    use with the Pairwise tool to perform singular value
+                    decomposition (SVD) rank recovery (i.e., generate picklists
+                    from comparing teams against each other). There are some
+                    limitations and strategies the end user can employ to ensure
+                    a smooth user experience, limit potential issues, and
+                    ultimately achieve a greater success rate. <br><br>
+
+                    <strong>First and foremost</strong> - you are NOT required to use this data
+                    collection tool for generating the comparisons. You can do
+                    this in your own app, by hand (surprisingly easy), or
+                    directly into a .csv file. This tool is just provided as an
+                    easy to access (and hopefullly easy to use) service, for
+                    exploration and understanding of the SVD process and as  a
+                    readily accessible option.<br><br>
+
+                    Pairwise data collection is meant to be lightweight and <strong>NOT</strong>
+                    intended to function as a data storage application. The data
+                    collection tool can best be thought of as a calculator,
+                    where the end user is responsible for saving the output to a
+                    file after performing the match observations. This is
+                    designed to function in as streamlined a process as possible.
+                    <br><br>
+
+                    <strong>Consistency is the key for success -</strong> With experience
+                    comparing teams to one another you may become more nuanced
+                    in your approach. This is an important skill, however it is
+                    vitally important that the manner in which you rank teams
+                    stays consistent throughout data collection throughout the
+                    event, a rubric may help in this endevor. Being consistent
+                    may prove to be difficult when there are many categories to
+                    place the alliance members relative to eachother and there
+                    are several people performing the comparisons. Limiting the
+                    number of categories and discussing if your ranking for that
+                    alliance in that match is consistent with how you approached
+                    previous matches may improve your consistency.
+
+                </p>
+                <!-- Add more content here -->
+
+            </section>
+
+            <section id="concepts">
+                <h2>Underpinning Concepts</h2>
+                <h3>Levels of data - N.O.I.R</h3>
+                <p>
+                    Any set of data can be placed into one of four categories,
+                    Nominal, Ordinal, Interval, or Ratio. These categories also
+                    known by the initialism NOIR represent the four distinct
+                    measurement scales that are used in statistics (or used for
+                    anything for that matter).
+                    </p><ul class="listshift">
+                        <li class="formatlistitem"><strong>Nominal</strong>: This is the simplest level of measurement and
+                        is just used in the grouping of items that have no distinct order.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Robot drivetrains - each robot has a type of drivetrain,
+                                how well that drivetrain performs would be a different metric</li><li>
+                                </li><li class="formatlistitem">Championship division names - different but with no
+                                meaningful order </li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Ordinal</strong>: There is an order or ranking to the data but it cannot be
+                        quantified between observations or even within the same observation.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Seed number of an alliance captain - it doesn't matter how
+                                much the first seeded team gets the position by, the second seeded team will still be
+                                next no matter what</li><li>
+                                </li><li class="formatlistitem">Award categories - some awards may be more prestigious than
+                                others, but that is not quantifiable. The Impact Award will be seen as more prestigious
+                                than a website award but the "By how much" is not necessarily answerable</li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Interval</strong>: There is an order to the measurements and an equal distance
+                        between the measurements. However, there is no absolute zero to the scale. Measurements are comparable
+                        between themselves but not to a fundamental zero point.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Match scores 
+and performance - values are comparable between matches,
+                                but the lack of a score doesn't imply a 
+lack of performance by a robot (eg. 2017 gear bracketed scoring)</li><li>
+                                </li><li class="formatlistitem">Time taken for tasks -  The time taken by a team to
+                                complete a certain task in the competition is measurable in minutes and seconds. The time
+                                intervals are consistent, but zero doesn't signify the absence of time. </li><li>
+                                </li><li class="formatlistitem">Gear Ratio Values - the actual numerical gear ratio values
+                                (e.g., 2:1, 3:1, etc.) These ratios demonstrate the quantitative relationship between
+                                the number of teeth or size of gears and help determine how much one gear rotates concerning
+                                another, influencing speed, torque, and power transmission. However, there is no "zero"; a 2:1
+                                reduction can be performed with a 20-tooth and a 10-tooth gearset or a 200-tooth and 100-tooth
+                                gearset</li><li>
+                            </li></ul>
+                        </li>
+                        <li class="formatlistitem"><strong>Ratio</strong>: The highest level of measurement. Data here can be ranked has equal
+                        distance between intervals and is relative to a meaningful zero point.
+                            <ul class="listshift">
+                                <li class="formatlistitem">Mass of Robot: If students were required to measure the mass
+                                of their robot. A measured mass of zero implies the absence of mass and therefore no robot 😢 .</li><li>
+                                </li><li class="formatlistitem">Number of Points Earned: Total points earned by a team throughout
+                                the competition. This data has a true zero point, meaning a score of zero indicates an absence
+                                of points.</li><li>
+                            </li></ul>
+                        </li>
+                    </ul>
+
+                    Pairwise SVD can operate with any Ordinal or Interval type data.
+                <p></p>
+
+                <!-- Add more content here -->
+            </section>
+
+            <section id="getting-started">
+                <h2>Getting Started</h2>
+                <p>
+                    The <a href="https://www.pairwisetool.com/datagen">Pairwise Data Input &amp; Formatter Tool</a>
+                    is designed to be as user friendly as possible without
+                    losing too much fine-grain control that may be desired with
+                    experience.<br><br>
+                    <strong>Simple use - Ease of understanding for consistency </strong><br>
+                    In its most basic configuration the data input
+                    tool provides a "Tier-maker" style input where (considering
+                    a match <u>completly</u> in isolation from the rest of the
+                    event or other teams competing that season) the user ranks
+                    the teams. This allows for basic "Greater-Than", "Less-Than"
+                    , and "Equal-To" style comparisons <i>within</i> the
+                    alliance (<strong>intra</strong>-alliance comparisons;
+                    ordinal level data). The core components of the simple input
+                    tool are labeled below: <br><br>
+                </p>
+                <img src="Pairwise%20-%20Help_data_gen_files/simple_input_0_labeled.PNG" width="95%" alt="Basic components of the Simple Data Input Tool ">
+
+                <p>
+
+                </p>
+
+                <p>
+                    <strong>Advanced use - More granular control for separability</strong><br>
+                    The main controls of the Advanced mode Pairwise Data Input &amp; Formatter Tool
+                    are the six sliders; three for red, three for blue. These
+                    are used to generate the output that is ultimatally used by
+                    the The <a href="https://www.pythonanywhere.com/file-processing">SVD File Processing Tool</a>
+                    to return the rankings. Additional information on the
+                    Advanced Mode, which supports weighted observations, will be coming soon.
+                </p><p>
+
+                </p><p>
+                   The SVD processing tool is not limited to using the input
+                   tools provided within Pairwise. The output of the tools is in
+                   a generally human-readable format whtat should not be
+                   overly difficult to emulate provided the data are collectd in
+                   the alliance - relative manner. This also opens up
+                   oppertunities for <strong>inter</strong>-alliance comparison
+                   or even <strong>inter</strong>-match comparisons. This raises
+                   the opertunity to selectivly rank teams that play against
+                   eachother or in back-to-back matches to improve seperability
+                   when the rank recovery is conducted with the SVD File
+                   Processing Tool.
+                </p>
+
+
+                <!-- Add more content here -->
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+
+                <p>
+                    Touch Support Coming Soon! you can see if touch support drag
+                    and drop functionality works on your device
+                    <a href="https://www.pairwisetool.com/datagen_exp">here</a>.
+                    this is JUST to check if drag and drop works, the output
+                    is not calcuated at the moment.
+                </p>
+
+                <p>
+                    The Blue Alliance is supported for pulling teams by event
+                    code and match number, hopefully reducing any input errors.
+                    Match codes can be found on
+                    <a> href="https://www.pairwisetool.com/datagen"&gt;The Blue Alliance Events page</a>
+                    in the event URLs (eg.2023mndu for the 2023 Lake Superior Regional,
+                    2019mijac for the 2019 michigan Jackson event, or 2024nvlv for
+                    the 2024 Las Vegas Regional)
+
+                    Presently this requires an internet connection to function,
+                    teams are not cached on the browser.
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+            <section id="faqs">
+                <h2>FAQs &amp; Troubleshooting</h2>
+
+                <h3>FAQs</h3>
+                <p>
+                    <strong>FAQ 1</strong>: Touch support doesn't work, I need to use the
+                    data input and formatter tool offline on a computer with
+                    a mouse for an event. What can I do?
+                    <br>
+                    <strong>Answer 1</strong>: Short of connecting a mouse to an android device,
+                    the data input and formatter tool runs locally, so as long
+                    as the computer browser load the .html you will be fine.
+
+                    On Firefox the can be accomnvlvplished in offline mode by:
+                    </p><ol>
+                        <li>While connected to the internet, in a new browser window, open the
+                            <a href="https://www.pairwisetool.com/datagen">Data Input andd Formatter Tool</a></li>
+                        <li>Go to "File" in the upper left (hit "Alt" to show "File"
+                            if it is not there)</li>
+                        <li>Toggle the "Work Offline" checkbox</li>
+                    </ol>
+                    This will unfortunatally mean any other tabs in Firefox are
+                    not connected as all of Firefox on that machine is now in
+                    offline mode.
+                    <br><br>
+
+                    <strong>FAQ 2</strong>: The Blue Alliance event code/match number for my upcoming
+                    event is not returning any teams. What could be the reason?
+                    <br>
+                    <strong>Answer 2</strong>: This integration requires an internet connection
+                    which may work well on mobile devices, but not on laptops.
+                    If you are testing before the event and connected to the
+                    internet this is likely down to the schedule not being
+                    released yet, test with a code from a previous year instead.
+                    you can always manually input the team numbers into the text
+                    boxes, just be careful that the team numbers oare correct.
+
+                <p></p>
+
+            </section>
+
+            <section id="additional-resources">
+                <h2>Additional Resources</h2>
+                <!--<p>-->
+                <!--    Pairwise operates on the principle of <a href="https://www.sciencedirect.com/science/article/abs/pii/S1063520321000233?fr=RR-2&ref=pdf_download&rr=7dd847563a9e114b">Rank Recovery from-->
+                <!--    Limited Pairwise Observations using Low Rank Matrix Completion</a>-->
+                <!--    which is implemented through <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.svd.html">Singular Value Decomposition</a>-->
+                <!--    with the aid of Scipy v1.11 and Python v3.10.-->
+
+                <!--    Operationally, larger teams with enough members to scout in-->
+                <!--    FRC may find use in implementing Pairwise into the scouting-->
+                <!--    workflow similar to how FRC 1678 (<a href="https://www.citruscircuits.org/uploads/6/9/3/4/6934550/whitepaper_2020.pdf">Citrus Circuits</a>) has in the-->
+                <!--    past.-->
+
+
+                <!--<p>-->
+                <p>
+                    Coming Soon!
+                </p>
+                <!-- Add more content here -->
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <!-- Footer content if needed -->
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('aside');
+            const sidebarNav = document.querySelector('#sidebarNav');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                sidebarHeader.classList.toggle('collapsed');
+                sidebarNav.classList.toggle('collapsed');
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(e,t) { return this._call('downloadPdfs', [e,t]); },
+  open() { return this._call('open', []); },
+  setLoginToken(e) { return this._call('setLoginToken', [e]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.9303757344408133', methodName, methodArgs }, 'https://www.pythonanywhere.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>
